@@ -9,7 +9,7 @@ class AppWidget extends StatelessWidget {
     return MaterialApp.router(
       routeInformationParser: Modular.routeInformationParser,
       routerDelegate: Modular.routerDelegate,
-      title: 'Flutter Slidy',
+      title: 'Toro App',
       theme: ThemeData(primarySwatch: Colors.blue),
     );
   }
