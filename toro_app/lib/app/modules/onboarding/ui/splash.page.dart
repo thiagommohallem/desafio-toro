@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:toro_app/common/widgets/toro_logo.widget.dart';
+import 'package:toro_app/common/widgets/toro_text.widget.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -7,9 +9,69 @@ class SplashPage extends StatefulWidget {
   State<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage> {
+class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
+  late AnimationController _logoAnimationController;
+
+  final _logoOffsetTween =
+      Tween<Offset>(begin: const Offset(0.6, 0), end: const Offset(0, 0));
+  final _textOffsetTween =
+      Tween<Offset>(begin: const Offset(-0.25, 0), end: const Offset(0, 0));
+  double _textOpacity = 0.0;
+
+  @override
+  void initState() {
+    _initializeAnimationController();
+    _startAnimations();
+    super.initState();
+  }
+
+  void _initializeAnimationController()  {
+    _logoAnimationController = AnimationController(
+        duration: const Duration(milliseconds: 800), vsync: this);
+  }
+
+  void _startAnimations() {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      _logoAnimationController.forward();
+      setState((() {
+        _textOpacity = 1.0;
+      }));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return Scaffold(
+      body: Stack(children: [
+        Padding(
+          padding: const EdgeInsets.only(right: 200.0),
+          child: SlideTransition(
+            position: _logoOffsetTween.animate(_logoAnimationController),
+            child: const Center(
+              child: ToroLogoWidget(),
+            ),
+          ),
+        ),
+        Center(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 100.0),
+            child: SlideTransition(
+              position: _textOffsetTween.animate(_logoAnimationController),
+              child: AnimatedOpacity(
+                duration: const Duration(seconds: 1),
+                opacity: _textOpacity,
+                child: const Center(child: ToroTextWidget()),
+              ),
+            ),
+          ),
+        ),
+      ]),
+    );
+  }
+
+  @override
+  void dispose() {
+    _logoAnimationController.dispose();
+    super.dispose();
   }
 }
