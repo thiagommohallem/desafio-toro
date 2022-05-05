@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:toro_app/common/widgets/toro_logo.widget.dart';
 import 'package:toro_app/common/widgets/toro_text.widget.dart';
 
@@ -22,10 +23,12 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   void initState() {
     _initializeAnimationController();
     _startAnimations();
+    Future.delayed(const Duration(seconds: 3))
+        .then((value) => Modular.to.pushNamed('/onboarding'));
     super.initState();
   }
 
-  void _initializeAnimationController()  {
+  void _initializeAnimationController() {
     _logoAnimationController = AnimationController(
         duration: const Duration(milliseconds: 800), vsync: this);
   }
