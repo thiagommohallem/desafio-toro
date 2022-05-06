@@ -17,5 +17,23 @@ void main() {
           find.descendant(of: _heroWidget, matching: _textImageAsset);
       expect(_fullTextWidget, findsOneWidget);
     });
+
+    testWidgets(
+        'Should return Text with values of height and width passed through parameters...',
+        (tester) async {
+      await tester.pumpWidget(const ToroTextWidget(
+        width: 100,
+        height: 100,
+      ));
+
+      final _heroWidget =
+          find.byWidgetPredicate((w) => w is Hero && w.tag == 'toro-text');
+      final _textImageAsset = find.byWidgetPredicate(
+          (w) => w is Image && w.width == 100 && w.height == 100);
+
+      final _fullTextWidget =
+          find.descendant(of: _heroWidget, matching: _textImageAsset);
+      expect(_fullTextWidget, findsOneWidget);
+    });
   });
 }
