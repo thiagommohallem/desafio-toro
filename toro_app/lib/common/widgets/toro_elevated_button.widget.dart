@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+
 import 'package:toro_app/colors.dart';
 
 class ToroElevatedButtonWidget extends StatelessWidget {
   final Color? color;
   final Widget child;
+  final void Function()? onPressed;
   const ToroElevatedButtonWidget({
     Key? key,
     this.color = toroPrimaryColor,
     required this.child,
+    required this.onPressed,
   }) : super(key: key);
 
   @override
@@ -16,7 +19,7 @@ class ToroElevatedButtonWidget extends StatelessWidget {
       width: double.infinity,
       height: 48,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: onPressed,
         child: child,
         style: ElevatedButton.styleFrom(
           primary: color,
