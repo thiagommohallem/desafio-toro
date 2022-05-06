@@ -1,0 +1,53 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:toro_app/common/utils/media_query_converter.dart';
+
+class OnboardingPageThree extends StatelessWidget {
+  const OnboardingPageThree({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const Spacer(),
+        _picture(context),
+        const Spacer(),
+        _title(),
+        const Spacer(),
+        _description(),
+        const Spacer(),
+      ],
+    );
+  }
+
+  SvgPicture _picture(BuildContext context) {
+    return SvgPicture.asset(
+      'lib/common/assets/images/onboarding_step_3.svg',
+      height: baseHeightConverter(context, 200),
+    );
+  }
+
+  Text _title() {
+    return Text(
+      "Cashback em Fundos de Investimento",
+      textAlign: TextAlign.center,
+      style: TextStyle(
+          fontSize: 24, fontWeight: FontWeight.bold, color: Colors.grey[700]),
+    );
+  }
+
+  RichText _description() {
+    return RichText(
+      textAlign: TextAlign.center,
+      text: TextSpan(
+        style: TextStyle(fontSize: 18, color: Colors.grey[700]),
+        children: const [
+          TextSpan(text: "Receba parte da taxa de administração, "),
+          TextSpan(
+              text: "em dinheiro, direto na sua conta Toro.",
+              style: TextStyle(fontWeight: FontWeight.bold)),
+        ],
+      ),
+    );
+  }
+}
