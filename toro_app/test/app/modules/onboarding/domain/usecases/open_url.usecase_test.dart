@@ -1,10 +1,14 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
+import 'package:toro_app/app/modules/onboarding/domain/errors/open_url_exception.dart';
 import 'package:toro_app/app/modules/onboarding/domain/infra/open_url.service.dart';
 import 'package:toro_app/app/modules/onboarding/domain/usecases/open_url.usecase.dart';
 
-class MockOpenUrlService extends Mock implements OpenUrlService {}
+import 'open_url.usecase_test.mocks.dart';
 
+@GenerateMocks([OpenUrlService])
 void main() {
   late OpenUrlUsecase _usecase;
   late MockOpenUrlService _mockOpenUrlService;
@@ -16,11 +20,11 @@ void main() {
 
   tearDownAll(() => _usecase.dispose());
   group('OpenUrlUsecase tests...', () {
-    test('Should return boolean value ...', () async {
-      when(() => _mockOpenUrlService.openUrl(url: any(named: "url")))
-          .thenAnswer((invocation) async => true);
+    test('Should return Either<OpenUrlException, bool> value ...', () async {
+      when(_mockOpenUrlService.openUrl(url: anyNamed("url")))
+          .thenAnswer((invocation) async => const Right(true));
       final result = await _usecase('teste.com');
-      expect(result, isA<bool>());
+      expect(result, isA<Either<OpenUrlException, bool>>());
     });
   });
 }

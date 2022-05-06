@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:modular_test/modular_test.dart';
 import 'package:toro_app/app/modules/onboarding/module/onboarding.module.dart';
 import 'package:toro_app/app/modules/onboarding/ui/cubits/splash_logo_opacity.cubit.dart';
@@ -9,18 +10,18 @@ import 'package:toro_app/app/modules/onboarding/ui/splash.page.dart';
 import 'package:toro_app/common/widgets/toro_logo.widget.dart';
 import 'package:toro_app/common/widgets/toro_text.widget.dart';
 
-class ModularNavigateMock extends Mock implements IModularNavigator {}
+import 'splash.page_test.mocks.dart';
 
+@GenerateMocks([IModularNavigator])
 void main() {
-  final navigate = ModularNavigateMock();
+  final navigate = MockIModularNavigator();
 
   setUpAll(() {
     Modular.navigatorDelegate = navigate;
     initModule(OnboardingModule(), replaceBinds: [
       Bind.factory<SplashTextOpacityCubit>((i) => SplashTextOpacityCubit()),
     ]);
-    when(() => navigate.pushNamed(any()))
-        .thenAnswer((invocation) async => true);
+    when(navigate.pushNamed('/onboarding')).thenAnswer((_) async => true);
   });
 
   group("SplashPage tests...", () {
@@ -37,7 +38,7 @@ void main() {
     testWidgets('Should push Onboarding page after 3 seconds', (tester) async {
       await tester.pumpWidget(const MaterialApp(home: SplashPage()));
       await tester.pumpAndSettle(const Duration(seconds: 3));
-      verify(() => navigate.pushNamed('/onboarding'));
+      verify(navigate.pushNamed('/onboarding'));
     });
   });
 }

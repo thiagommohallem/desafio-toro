@@ -2,7 +2,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:toro_app/app/modules/onboarding/ui/cubits/open_url.cubit.dart';
+import 'package:toro_app/app/modules/onboarding/ui/cubits/open_url_cubit.dart';
 import 'package:toro_app/app/modules/onboarding/ui/cubits/page_index.cubit.dart';
 import 'package:toro_app/app/modules/onboarding/widgets/onboarding_page_four.widget.dart';
 import 'package:toro_app/app/modules/onboarding/widgets/onboarding_page_one.widget.dart';
@@ -24,32 +24,50 @@ class OnboardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(
-              top: 18.0, bottom: 14.0, left: 24, right: 24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              _logoAndToroText(),
-              const Spacer(),
-              _onboardingPageView(context),
-              const SizedBox(height: 24),
-              _dotsIndicator(),
-              const Spacer(
-                flex: 2,
+      body: BlocBuilder<OpenToroSignUpUrlCubit, OpenUrlState>(
+        bloc: _openUrlCubit,
+        builder: (context, state) {
+          if (state is OpenUrlErrorState) {
+            WidgetsBinding.instance!.addPostFrameCallback((_) {
+              showDialog(
+                context: context,
+                builder: (_) => const ToroErrorAlertDialog(
+                  text: SelectableText(
+                    "Ops, ocorreu um erro ao abrir o site",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+              );
+            });
+          }
+          return SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.only(
+                  top: 18.0, bottom: 14.0, left: 24, right: 24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  _logoAndToroText(),
+                  const Spacer(),
+                  _onboardingPageView(context),
+                  const SizedBox(height: 24),
+                  _dotsIndicator(),
+                  const Spacer(
+                    flex: 2,
+                  ),
+                  _openAccountButton(context),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  _loginButton(),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                ],
               ),
-              _openAccountButton(context),
-              const SizedBox(
-                height: 16,
-              ),
-              _loginButton(),
-              const SizedBox(
-                height: 16,
-              ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -105,19 +123,6 @@ class OnboardingPage extends StatelessWidget {
     return ToroElevatedButtonWidget(
       onPressed: () async {
         await _openUrlCubit.openUrl();
-        if (_openUrlCubit.state != null && _openUrlCubit.state == false) {
-          showDialog(
-            context: context,
-            builder: (_) {
-              return const ToroErrorAlertDialog(
-                text: SelectableText(
-                  "Ops, ocorreu um erro ao abrir o site",
-                  style: TextStyle(fontSize: 18),
-                ),
-              );
-            },
-          );
-        }
       },
       child: const Text(
         "Abra sua conta grátis",

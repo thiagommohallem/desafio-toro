@@ -1,5 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:toro_app/app/modules/onboarding/domain/errors/open_url_exception.dart';
 import 'package:toro_app/app/modules/onboarding/infra/services/open_url_service.impl.dart';
 
 void main() {
@@ -20,8 +21,8 @@ void main() {
         return Future.value(null);
       });
 
-      bool result = await _openUrlService.openUrl(url: "teste.com");
-      expect(result, false);
+      final result = await _openUrlService.openUrl(url: "teste.com");
+      result.fold((l) {}, (r) => expect(r, false));
     });
 
     test(
@@ -37,11 +38,11 @@ void main() {
         }
         return Future.value(null);
       });
-      bool result = await _openUrlService.openUrl(url: "teste.com");
-      expect(result, true);
+      final result = await _openUrlService.openUrl(url: "teste.com");
+      result.fold((l) {}, (r) => expect(r, true));
     });
 
-    test('Should return false on Exception', () async {
+    test('Should return OpenUrlException on exception', () async {
       const MethodChannel('plugins.flutter.io/url_launcher_macos')
           .setMockMethodCallHandler((MethodCall call) {
         if (call.method == 'canLaunch') {
@@ -49,8 +50,10 @@ void main() {
         }
         return Future.value(null);
       });
-      bool result = await _openUrlService.openUrl(url: "teste.com");
-      expect(result, false);
+      final result = await _openUrlService.openUrl(url: "teste.com");
+      result.fold((l) {
+        expect(l, isA<OpenUrlException>());
+      }, (r) {});
     });
   });
 }

@@ -28,7 +28,9 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   cupertino_icons: ^1.0.2
+  dartz: ^0.10.1
   dots_indicator: ^2.1.0
+  equatable: ^2.0.3
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1
@@ -38,10 +40,11 @@ dependencies:
 
 dev_dependencies:
   bloc_test: ^9.0.3
+  build_runner: ^2.1.10
   flutter_lints: ^1.0.0
   flutter_test:
     sdk: flutter
-  mocktail: ^0.3.0
+  mockito: ^5.1.0
   modular_test: ^1.0.1+2
 
 # For information on the generic Dart part of this file, see the

@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:toro_app/colors.dart';
 import 'package:toro_app/common/widgets/toro_error_alert_dialog.widget.dart';
 
-class ModularNavigateMock extends Mock implements IModularNavigator {}
+import 'toro_error_alert_dialog.widget_test.mocks.dart';
 
+@GenerateMocks([IModularNavigator])
 void main() {
-  final navigate = ModularNavigateMock();
+  final navigate = MockIModularNavigator();
   setUpAll(() {
     Modular.navigatorDelegate = navigate;
   });
@@ -51,7 +53,7 @@ void main() {
       final _okActionButton = find.widgetWithText(TextButton, "OK");
       expect(_okActionButton, findsOneWidget);
       await tester.tap(_okActionButton);
-      verify(() => navigate.pop()).called(1);
+      verify(navigate.pop()).called(1);
     });
   });
 }

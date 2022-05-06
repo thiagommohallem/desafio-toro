@@ -2,10 +2,11 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:modular_test/modular_test.dart';
 import 'package:toro_app/app/modules/onboarding/module/onboarding.module.dart';
-import 'package:toro_app/app/modules/onboarding/ui/cubits/open_url.cubit.dart';
+import 'package:toro_app/app/modules/onboarding/ui/cubits/open_url_cubit.dart';
 import 'package:toro_app/app/modules/onboarding/ui/onboarding.page.dart';
 import 'package:toro_app/app/modules/onboarding/widgets/onboarding_page_two.widget.dart';
 import 'package:toro_app/common/widgets/toro_elevated_button.widget.dart';
@@ -13,15 +14,21 @@ import 'package:toro_app/common/widgets/toro_error_alert_dialog.widget.dart';
 import 'package:toro_app/common/widgets/toro_logo.widget.dart';
 import 'package:toro_app/common/widgets/toro_text.widget.dart';
 
-class MockOpenToroSignUpUrlCubit extends Mock
-    implements OpenToroSignUpUrlCubit {}
+import 'onboarding.page_test.mocks.dart';
 
+@GenerateMocks([OpenToroSignUpUrlCubit])
 void main() {
   final mockOpenUrlCubit = MockOpenToroSignUpUrlCubit();
+
   setUpAll(() {
     initModule(OnboardingModule(), replaceBinds: [
       Bind<OpenToroSignUpUrlCubit>((_) => mockOpenUrlCubit),
     ]);
+  });
+
+  setUp(() {
+    when(mockOpenUrlCubit.state).thenReturn(OpenUrlInitial());
+    when(mockOpenUrlCubit.stream).thenAnswer((_) => Stream.fromIterable([]));
   });
   group('OnboardingPage widget tests...', () {
     testWidgets(
@@ -79,21 +86,27 @@ void main() {
       expect(_dotsIndicatorInStep2, findsOneWidget);
     });
 
-    testWidgets(
-        'Should show error dialog when Open Account button is clicked and has error',
+    testWidgets('Should call openUrl when OpenAccount button is tapped',
         (tester) async {
+      when(mockOpenUrlCubit.openUrl()).thenAnswer((invocation) async => {});
       await tester.pumpWidget(MaterialApp(
         home: OnboardingPage(),
       ));
       final _openAccountButton = _findOpenAccountButton();
       expect(_openAccountButton, findsOneWidget);
-      when(() => mockOpenUrlCubit.openUrl())
-          .thenAnswer((invocation) async => mockOpenUrlCubit.emit(false));
-      when(() => mockOpenUrlCubit.state).thenReturn(false);
 
       await tester.tap(_openAccountButton);
       await tester.pumpAndSettle();
 
+      verify(mockOpenUrlCubit.openUrl()).called(1);
+    });
+    testWidgets('Should show error dialog when state is OpenUrlErrorState',
+        (tester) async {
+      when(mockOpenUrlCubit.state).thenReturn(OpenUrlErrorState());
+      await tester.pumpWidget(MaterialApp(
+        home: OnboardingPage(),
+      ));
+      await tester.pumpAndSettle();
       final errorDialog = find.byWidgetPredicate(
         (w) => w is ToroErrorAlertDialog && w.text is SelectableText,
       );
