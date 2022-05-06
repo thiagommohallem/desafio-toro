@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:toro_app/app/modules/onboarding/ui/cubits/splash_logo_opacity.cubit.dart';
 import 'package:toro_app/common/widgets/toro_logo.widget.dart';
 import 'package:toro_app/common/widgets/toro_text.widget.dart';
 
@@ -12,12 +14,12 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   late AnimationController _logoAnimationController;
+  final SplashTextOpacityCubit _opacityCubit = Modular.get();
 
   final _logoOffsetTween =
       Tween<Offset>(begin: const Offset(0.6, 0), end: const Offset(0, 0));
   final _textOffsetTween =
       Tween<Offset>(begin: const Offset(-0.25, 0), end: const Offset(0, 0));
-  double _textOpacity = 0.0;
 
   @override
   void initState() {
@@ -36,9 +38,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   void _startAnimations() {
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       _logoAnimationController.forward();
-      setState((() {
-        _textOpacity = 1.0;
-      }));
+      _opacityCubit.setOpacity(1.0);
     });
   }
 
@@ -60,10 +60,13 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
             padding: const EdgeInsets.only(left: 100.0),
             child: SlideTransition(
               position: _textOffsetTween.animate(_logoAnimationController),
-              child: AnimatedOpacity(
-                duration: const Duration(seconds: 1),
-                opacity: _textOpacity,
-                child: const Center(child: ToroTextWidget()),
+              child: BlocBuilder<SplashTextOpacityCubit, double>(
+                bloc: _opacityCubit,
+                builder: (_, state) => AnimatedOpacity(
+                  duration: const Duration(seconds: 1),
+                  opacity: state,
+                  child: const Center(child: ToroTextWidget()),
+                ),
               ),
             ),
           ),
@@ -75,6 +78,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   @override
   void dispose() {
     _logoAnimationController.dispose();
+    _opacityCubit.close();
     super.dispose();
   }
 }

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:modular_test/modular_test.dart';
+import 'package:toro_app/app/modules/onboarding/module/onboarding.module.dart';
+import 'package:toro_app/app/modules/onboarding/ui/cubits/splash_logo_opacity.cubit.dart';
 import 'package:toro_app/app/modules/onboarding/ui/splash.page.dart';
 import 'package:toro_app/common/widgets/toro_logo.widget.dart';
 import 'package:toro_app/common/widgets/toro_text.widget.dart';
@@ -13,6 +16,9 @@ void main() {
 
   setUpAll(() {
     Modular.navigatorDelegate = navigate;
+    initModule(OnboardingModule(), replaceBinds: [
+      Bind.factory<SplashTextOpacityCubit>((i) => SplashTextOpacityCubit()),
+    ]);
     when(() => navigate.pushNamed(any()))
         .thenAnswer((invocation) async => true);
   });
@@ -21,7 +27,7 @@ void main() {
     testWidgets('Should display Logo and Text after animations',
         (tester) async {
       await tester.pumpWidget(const MaterialApp(home: SplashPage()));
-      await tester.pumpAndSettle();
+      await tester.pumpAndSettle(const Duration(seconds: 3));
 
       final _logo = find.byType(ToroLogoWidget);
       expect(_logo, findsOneWidget);
@@ -30,7 +36,6 @@ void main() {
     });
     testWidgets('Should push Onboarding page after 3 seconds', (tester) async {
       await tester.pumpWidget(const MaterialApp(home: SplashPage()));
-
       await tester.pumpAndSettle(const Duration(seconds: 3));
       verify(() => navigate.pushNamed('/onboarding'));
     });
