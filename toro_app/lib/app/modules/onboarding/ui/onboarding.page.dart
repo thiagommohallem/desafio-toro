@@ -11,6 +11,7 @@ import 'package:toro_app/app/modules/onboarding/widgets/onboarding_page_two.widg
 import 'package:toro_app/colors.dart';
 import 'package:toro_app/common/utils/media_query_converter.dart';
 import 'package:toro_app/common/widgets/toro_elevated_button.widget.dart';
+import 'package:toro_app/common/widgets/toro_error_alert_dialog.widget.dart';
 import 'package:toro_app/common/widgets/toro_logo.widget.dart';
 import 'package:toro_app/common/widgets/toro_text.widget.dart';
 
@@ -18,6 +19,7 @@ class OnboardingPage extends StatelessWidget {
   OnboardingPage({Key? key}) : super(key: key);
 
   final PageIndexCubit _pageIndexCubit = Modular.get();
+  final OpenToroSignUpUrlCubit _openUrlCubit = Modular.get();
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,7 @@ class OnboardingPage extends StatelessWidget {
               const Spacer(
                 flex: 2,
               ),
-              _openAccountButton(),
+              _openAccountButton(context),
               const SizedBox(
                 height: 16,
               ),
@@ -99,10 +101,23 @@ class OnboardingPage extends StatelessWidget {
     );
   }
 
-  ToroElevatedButtonWidget _openAccountButton() {
+  ToroElevatedButtonWidget _openAccountButton(BuildContext context) {
     return ToroElevatedButtonWidget(
-      onPressed: () {
-        Modular.get<OpenToroSignUpUrlCubit>().openUrl();
+      onPressed: () async {
+        await _openUrlCubit.openUrl();
+        if (_openUrlCubit.state != null && _openUrlCubit.state == false) {
+          showDialog(
+            context: context,
+            builder: (_) {
+              return const ToroErrorAlertDialog(
+                text: SelectableText(
+                  "Ops, ocorreu um erro ao abrir o site",
+                  style: TextStyle(fontSize: 18),
+                ),
+              );
+            },
+          );
+        }
       },
       child: const Text(
         "Abra sua conta grátis",
