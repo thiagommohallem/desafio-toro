@@ -10,12 +10,20 @@ import 'package:toro_app/common/widgets/toro_logo.widget.dart';
 import 'package:toro_app/common/widgets/toro_text.widget.dart';
 import 'package:toro_app/common/widgets/toro_text_form_field.widget.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginPage({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   final TextEditingController _emailController = TextEditingController();
+
   final TextEditingController _passwordController = TextEditingController();
+
   final SignInCubit _signInCubit = Modular.get();
 
   @override
@@ -119,7 +127,7 @@ class LoginPage extends StatelessWidget {
         if (state is SignInInitial) {
           return _form();
         } else {
-          //TODO IMPLEMENTAR SUCESSO
+          Modular.to.pushReplacementNamed('/login/home/');
           return Container();
         }
       },
@@ -182,5 +190,13 @@ class LoginPage extends StatelessWidget {
         color: Colors.grey,
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _signInCubit.close();
+    super.dispose();
   }
 }

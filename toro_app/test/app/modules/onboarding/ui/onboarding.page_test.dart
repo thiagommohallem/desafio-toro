@@ -34,7 +34,7 @@ void main() {
     testWidgets(
         'Should display logo, text, pageview, dotsIndicator in step 1 and buttons',
         (tester) async {
-      await tester.pumpWidget(MaterialApp(
+      await tester.pumpWidget(const MaterialApp(
         home: OnboardingPage(),
       ));
       final _toroLogo = find.byWidgetPredicate(
@@ -67,7 +67,7 @@ void main() {
 
     testWidgets('Should change dots indicator when pageview is scrolled',
         (tester) async {
-      await tester.pumpWidget(MaterialApp(
+      await tester.pumpWidget(const MaterialApp(
         home: OnboardingPage(),
       ));
 
@@ -89,7 +89,7 @@ void main() {
     testWidgets('Should call openUrl when OpenAccount button is tapped',
         (tester) async {
       when(mockOpenUrlCubit.openUrl()).thenAnswer((invocation) async => {});
-      await tester.pumpWidget(MaterialApp(
+      await tester.pumpWidget(const MaterialApp(
         home: OnboardingPage(),
       ));
       final _openAccountButton = _findOpenAccountButton();
@@ -103,7 +103,7 @@ void main() {
     testWidgets('Should show error dialog when state is OpenUrlErrorState',
         (tester) async {
       when(mockOpenUrlCubit.state).thenReturn(OpenUrlErrorState());
-      await tester.pumpWidget(MaterialApp(
+      await tester.pumpWidget(const MaterialApp(
         home: OnboardingPage(),
       ));
       await tester.pumpAndSettle();

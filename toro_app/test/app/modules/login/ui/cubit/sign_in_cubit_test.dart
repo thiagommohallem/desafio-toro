@@ -15,6 +15,9 @@ class MockSignInUsecase implements SignInUsecase {
       return Future.value(Left(UserNotFoundException(message: 'message')));
     }
   }
+
+  @override
+  dispose() {}
 }
 
 void main() {

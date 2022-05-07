@@ -15,10 +15,16 @@ import 'package:toro_app/common/widgets/toro_error_alert_dialog.widget.dart';
 import 'package:toro_app/common/widgets/toro_logo.widget.dart';
 import 'package:toro_app/common/widgets/toro_text.widget.dart';
 
-class OnboardingPage extends StatelessWidget {
-  OnboardingPage({Key? key}) : super(key: key);
+class OnboardingPage extends StatefulWidget {
+  const OnboardingPage({Key? key}) : super(key: key);
 
+  @override
+  State<OnboardingPage> createState() => _OnboardingPageState();
+}
+
+class _OnboardingPageState extends State<OnboardingPage> {
   final PageIndexCubit _pageIndexCubit = Modular.get();
+
   final OpenToroSignUpUrlCubit _openUrlCubit = Modular.get();
 
   @override
@@ -136,7 +142,7 @@ class OnboardingPage extends StatelessWidget {
       tag: 'login-button',
       child: ToroElevatedButtonWidget(
         onPressed: () {
-          Modular.to.pushNamed('/login/');
+          Modular.to.navigate('/login/');
         },
         child: const Text(
           "Entrar",
@@ -145,5 +151,12 @@ class OnboardingPage extends StatelessWidget {
         color: Colors.grey,
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _openUrlCubit.close();
+    _pageIndexCubit.close();
+    super.dispose();
   }
 }

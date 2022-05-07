@@ -17,4 +17,7 @@ class MockLoginDatasource implements AuthDatasource {
           message: "Não encontramos um usuário cadastrado com esse e-mail");
     }
   }
+
+  @override
+  dispose() {}
 }

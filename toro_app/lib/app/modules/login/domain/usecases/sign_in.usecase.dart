@@ -7,6 +7,7 @@ import 'package:toro_app/app/modules/login/domain/model/user.model.dart';
 abstract class ISignInUsecase {
   Future<Either<AuthException, User>> signIn(
       {required String email, required String password});
+  dispose();
 }
 
 class SignInUsecase implements ISignInUsecase {
@@ -27,5 +28,10 @@ class SignInUsecase implements ISignInUsecase {
       });
     }
     return result;
+  }
+
+  @override
+  dispose() {
+    _repository.dispose();
   }
 }

@@ -22,4 +22,10 @@ class SignInCubit extends Cubit<SignInState> {
   }
 
   void returnToInitialState() => emit(SignInInitial());
+
+  @override
+  Future<void> close() {
+    _usecase.dispose();
+    return super.close();
+  }
 }

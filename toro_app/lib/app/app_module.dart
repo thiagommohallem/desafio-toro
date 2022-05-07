@@ -10,7 +10,7 @@ class AppModule extends Module {
   final List<ModularRoute> routes = [
     ModuleRoute(Modular.initialRoute, module: OnboardingModule()),
     ChildRoute('/onboarding',
-        child: (_, __) => OnboardingPage(),
+        child: (_, __) => const OnboardingPage(),
         transition: TransitionType.fadeIn,
         duration: const Duration(seconds: 1, milliseconds: 300))
   ];

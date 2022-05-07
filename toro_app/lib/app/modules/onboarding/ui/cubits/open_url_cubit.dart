@@ -21,4 +21,10 @@ class OpenToroSignUpUrlCubit extends Cubit<OpenUrlState> {
       }
     });
   }
+
+  @override
+  Future<void> close() {
+    _openUrlUsecase.dispose();
+    return super.close();
+  }
 }

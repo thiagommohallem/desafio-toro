@@ -20,4 +20,9 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(e);
     }
   }
+
+  @override
+  dispose() {
+    _datasource.dispose();
+  }
 }
