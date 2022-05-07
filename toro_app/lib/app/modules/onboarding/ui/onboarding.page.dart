@@ -131,14 +131,19 @@ class OnboardingPage extends StatelessWidget {
     );
   }
 
-  ToroElevatedButtonWidget _loginButton() {
-    return ToroElevatedButtonWidget(
-      onPressed: () {},
-      child: const Text(
-        "Entrar",
-        style: TextStyle(fontSize: 16),
+  Hero _loginButton() {
+    return Hero(
+      tag: 'login-button',
+      child: ToroElevatedButtonWidget(
+        onPressed: () {
+          Modular.to.pushNamed('/login/');
+        },
+        child: const Text(
+          "Entrar",
+          style: TextStyle(fontSize: 16),
+        ),
+        color: Colors.grey,
       ),
-      color: Colors.grey,
     );
   }
 }
