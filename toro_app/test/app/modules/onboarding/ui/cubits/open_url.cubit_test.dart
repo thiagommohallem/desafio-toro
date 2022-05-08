@@ -12,6 +12,10 @@ import 'open_url.cubit_test.mocks.dart';
 @GenerateMocks([IOpenUrlUsecase])
 void main() {
   final _usecaseMock = MockIOpenUrlUsecase();
+
+  setUpAll(() {
+    when(_usecaseMock.dispose()).thenAnswer((realInvocation) async => true);
+  });
   group("OpenToroSignUpUrlCubit tests...", () {
     blocTest<OpenToroSignUpUrlCubit, OpenUrlState>(
       "Emits true when openUrl returns true",
