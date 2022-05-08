@@ -7,6 +7,7 @@ import 'package:mockito/mockito.dart';
 import 'package:modular_test/modular_test.dart';
 import 'package:toro_app/app/modules/onboarding/module/onboarding.module.dart';
 import 'package:toro_app/app/modules/onboarding/ui/cubits/open_url_cubit.dart';
+import 'package:toro_app/app/modules/onboarding/ui/cubits/page_index.cubit.dart';
 import 'package:toro_app/app/modules/onboarding/ui/onboarding.page.dart';
 import 'package:toro_app/app/modules/onboarding/widgets/onboarding_page_two.widget.dart';
 import 'package:toro_app/common/widgets/toro_elevated_button.widget.dart';
@@ -23,6 +24,7 @@ void main() {
   setUpAll(() {
     initModule(OnboardingModule(), replaceBinds: [
       Bind<OpenToroSignUpUrlCubit>((_) => mockOpenUrlCubit),
+      Bind.factory<PageIndexCubit>((_) => PageIndexCubit()),
     ]);
   });
 
