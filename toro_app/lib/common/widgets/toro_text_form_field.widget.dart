@@ -30,9 +30,6 @@ class ToroTextFormField extends StatelessWidget {
       obscureText: obscureText,
       keyboardType: keyboardType,
       inputFormatters: inputFormatters,
-      onChanged: (value) {
-        controller.text = value;
-      },
       style: const TextStyle(fontSize: 20),
       decoration: InputDecoration(
         floatingLabelStyle: const TextStyle(
