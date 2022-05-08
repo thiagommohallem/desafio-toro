@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:toro_app/app/modules/home/module/home.module.dart';
 import 'package:toro_app/app/modules/login/data/datasource/mock_login_datasource.dart';
 import 'package:toro_app/app/modules/login/domain/infra/auth_repository.dart';
 import 'package:toro_app/app/modules/login/domain/usecases/sign_in.usecase.dart';
@@ -18,6 +19,7 @@ class LoginModule extends Module {
 
   @override
   List<ModularRoute> get routes => [
-        ChildRoute(Modular.initialRoute, child: (_, __) => LoginPage()),
+        ChildRoute(Modular.initialRoute, child: (_, __) => const LoginPage()),
+        ModuleRoute('/home', module: HomeModule()),
       ];
 }
