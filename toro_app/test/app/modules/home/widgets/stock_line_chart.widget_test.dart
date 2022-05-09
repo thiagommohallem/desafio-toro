@@ -2,7 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:toro_app/app/modules/home/domain/models/stock_quote.model.dart';
-import 'package:toro_app/app/modules/home/widgets/stock_line_chart.widget.dart';
+import 'package:toro_app/app/modules/home/ui/widgets/stock_line_chart.widget.dart';
 
 void main() {
   group('StockLineChart widget test ...', () {

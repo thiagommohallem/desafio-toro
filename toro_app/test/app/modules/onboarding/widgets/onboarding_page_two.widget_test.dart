@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:toro_app/app/modules/onboarding/widgets/onboarding_page_two.widget.dart';
+import 'package:toro_app/app/modules/onboarding/ui/widgets/onboarding_page_two.widget.dart';
 
 void main() {
   group("OnboardingPageTwo widget tests ...", () {

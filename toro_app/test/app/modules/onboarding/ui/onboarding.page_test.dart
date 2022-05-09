@@ -9,7 +9,7 @@ import 'package:toro_app/app/modules/onboarding/module/onboarding.module.dart';
 import 'package:toro_app/app/modules/onboarding/presenters/cubits/open_url_cubit.dart';
 import 'package:toro_app/app/modules/onboarding/presenters/cubits/page_index.cubit.dart';
 import 'package:toro_app/app/modules/onboarding/ui/onboarding.page.dart';
-import 'package:toro_app/app/modules/onboarding/widgets/onboarding_page_two.widget.dart';
+import 'package:toro_app/app/modules/onboarding/ui/widgets/onboarding_page_two.widget.dart';
 import 'package:toro_app/common/widgets/toro_elevated_button.widget.dart';
 import 'package:toro_app/common/widgets/toro_error_alert_dialog.widget.dart';
 import 'package:toro_app/common/widgets/toro_logo.widget.dart';
