@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:toro_app/app/modules/home/domain/models/stock_quote.model.dart';
 import 'package:toro_app/app/modules/home/ui/bloc/quotes_bloc.dart';
+import 'package:toro_app/app/modules/home/widgets/line_chart.widget.dart';
 import 'package:toro_app/colors.dart';
 import 'package:toro_app/common/widgets/toro_logo.widget.dart';
 import 'package:toro_app/common/widgets/toro_text.widget.dart';
@@ -46,7 +47,11 @@ class _HomePageState extends State<HomePage> {
               ]),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.only(
+            left: 16.0,
+            right: 16,
+            top: 16,
+          ),
           child: BlocBuilder<QuotesBloc, QuotesState>(
             bloc: _quotesBloc,
             builder: (_, state) {
@@ -98,7 +103,7 @@ class _HomePageState extends State<HomePage> {
           stockQuote = stockQuotes[stockQuotes.length - index - 1];
         }
         return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 6),
+          padding: const EdgeInsets.only(top: 10),
           child: Center(
             child: _stockCard(stockQuote),
           ),
@@ -109,34 +114,54 @@ class _HomePageState extends State<HomePage> {
 
   Card _stockCard(StockQuote stockQuote) {
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 10),
       elevation: 5.0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(26)),
-      child: Padding(
+      child: Container(
         padding: const EdgeInsets.all(24.0),
-        child: Column(
+        height: 130,
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              stockQuote.stockId,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+            SizedBox(
+              width: 80,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    stockQuote.stockId,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 20),
+                  ),
+                  const Spacer(),
+                  FittedBox(
+                    child: Text(
+                        "R\$" + stockQuote.currentPrince.toStringAsFixed(2),
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20)),
+                  ),
+                ],
+              ),
             ),
             const SizedBox(
-              height: 16,
+              width: 10,
             ),
-            Row(
-              children: [
-                Text(
-                  "R\$" + stockQuote.currentPrince.toStringAsFixed(2),
+            SizedBox(
+              width: 150,
+              child: StockLineChart(stockQuote: stockQuote),
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            Center(
+              child: Text(
+                stockQuote.valuation > 0
+                    ? "+" + stockQuote.valuation.toStringAsFixed(2) + "%"
+                    : stockQuote.valuation.toStringAsFixed(2) + "%",
+                style: TextStyle(
+                  color: stockQuote.valuation > 0 ? Colors.green : Colors.red,
+                  fontSize: 20,
                 ),
-                const Spacer(),
-                Text(
-                  stockQuote.valuation.toStringAsFixed(2) + "%",
-                  style: TextStyle(
-                    color: stockQuote.valuation > 0 ? Colors.green : Colors.red,
-                  ),
-                ),
-              ],
+              ),
             ),
           ],
         ),
