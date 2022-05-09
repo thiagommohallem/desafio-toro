@@ -14,7 +14,11 @@ void main() {
 
   final List<StockQuote> list = [
     StockQuote(
-        stockId: 'stockId', currentPrince: 1.0, openPrice: 1.0, valuation: 1.0)
+        stockId: 'stockId',
+        currentPrince: 1.0,
+        openPrice: 1.0,
+        valuation: 1.0,
+        timestamp: DateTime(2020, 2, 2))
   ];
   group('QuotesBloc tests ...', () {
     setUpAll(() {
