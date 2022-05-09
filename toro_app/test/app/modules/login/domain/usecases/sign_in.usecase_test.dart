@@ -47,5 +47,13 @@ void main() {
       result.fold((l) => expect(l.runtimeType, UserNotFoundException),
           (r) => expect(r, null));
     });
+
+    test('Should call repository dispose on dispose', () async {
+      when(_repositoryMock.dispose())
+          .thenAnswer((realInvocation) async => true);
+
+      await _usecase.dispose();
+      verify(_repositoryMock.dispose()).called(1);
+    });
   });
 }

@@ -35,6 +35,7 @@ void main() {
           valuation: 10.0,
           timestamp: DateTime(2020, 2, 2));
       expect(model3 == model2, true);
+      expect(model3.hashCode == model2.hashCode, true);
       expect(model == model2, false);
       expect(model == model3, false);
     });

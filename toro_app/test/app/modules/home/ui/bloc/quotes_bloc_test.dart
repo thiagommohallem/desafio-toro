@@ -21,11 +21,17 @@ void main() {
         timestamp: DateTime(2020, 2, 2))
   ];
   group('QuotesBloc tests ...', () {
-    setUpAll(() {
+    setUp(() {
       when(_usecaseMock.dispose()).thenAnswer((realInvocation) async => true);
     });
 
     tearDown(() => reset(_usecaseMock));
+
+    test("Initial state should be QuotesInitial", () {
+      final bloc = QuotesBloc(_usecaseMock);
+      expect(bloc.state, QuotesInitial());
+    });
+
     blocTest<QuotesBloc, QuotesState>(
       "Should emit StockReceivedSuccess after Subscribed event is added and a StockQuote is received",
       build: () => QuotesBloc(_usecaseMock),

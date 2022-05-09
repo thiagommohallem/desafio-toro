@@ -17,11 +17,13 @@ import 'package:toro_app/common/widgets/toro_text.widget.dart';
 
 import 'onboarding.page_test.mocks.dart';
 
-@GenerateMocks([OpenToroSignUpUrlCubit])
+@GenerateMocks([OpenToroSignUpUrlCubit, IModularNavigator])
 void main() {
   final mockOpenUrlCubit = MockOpenToroSignUpUrlCubit();
+  final navigate = MockIModularNavigator();
 
   setUpAll(() {
+    Modular.navigatorDelegate = navigate;
     initModule(OnboardingModule(), replaceBinds: [
       Bind<OpenToroSignUpUrlCubit>((_) => mockOpenUrlCubit),
       Bind.factory<PageIndexCubit>((_) => PageIndexCubit()),
@@ -101,6 +103,20 @@ void main() {
       await tester.pumpAndSettle();
 
       verify(mockOpenUrlCubit.openUrl()).called(1);
+    });
+
+    testWidgets('Should navigate to login when login button is pressed',
+        (tester) async {
+      await tester.pumpWidget(const MaterialApp(
+        home: OnboardingPage(),
+      ));
+      final _loginButton = _findLoginButton();
+      expect(_loginButton, findsOneWidget);
+
+      await tester.tap(_loginButton);
+      await tester.pumpAndSettle();
+
+      verify(navigate.navigate('/login/')).called(1);
     });
     testWidgets('Should show error dialog when state is OpenUrlErrorState',
         (tester) async {

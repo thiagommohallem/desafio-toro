@@ -3,8 +3,13 @@
 // Do not manually edit this file.
 
 import 'dart:async' as _i3;
+import 'dart:ui' as _i8;
 
 import 'package:bloc/bloc.dart' as _i4;
+import 'package:flutter/material.dart' as _i7;
+import 'package:flutter_modular/src/presenter/models/modular_navigator.dart'
+    as _i5;
+import 'package:flutter_modular/src/presenter/models/route.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:toro_app/app/modules/onboarding/ui/cubits/open_url_cubit.dart'
     as _i2;
@@ -66,5 +71,98 @@ class MockOpenToroSignUpUrlCubit extends _i1.Mock
   @override
   void onError(Object? error, StackTrace? stackTrace) =>
       super.noSuchMethod(Invocation.method(#onError, [error, stackTrace]),
+          returnValueForMissingStub: null);
+}
+
+/// A class which mocks [IModularNavigator].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockIModularNavigator extends _i1.Mock implements _i5.IModularNavigator {
+  MockIModularNavigator() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  String get path =>
+      (super.noSuchMethod(Invocation.getter(#path), returnValue: '') as String);
+  @override
+  List<_i6.ParallelRoute<dynamic>> get navigateHistory =>
+      (super.noSuchMethod(Invocation.getter(#navigateHistory),
+              returnValue: <_i6.ParallelRoute<dynamic>>[])
+          as List<_i6.ParallelRoute<dynamic>>);
+  @override
+  _i3.Future<T?> push<T extends Object?>(_i7.Route<T>? route) =>
+      (super.noSuchMethod(Invocation.method(#push, [route]),
+          returnValue: Future<T?>.value()) as _i3.Future<T?>);
+  @override
+  _i3.Future<T?> popAndPushNamed<T extends Object?, TO extends Object?>(
+          String? routeName,
+          {TO? result,
+          Object? arguments,
+          bool? forRoot = false}) =>
+      (super.noSuchMethod(
+          Invocation.method(#popAndPushNamed, [routeName],
+              {#result: result, #arguments: arguments, #forRoot: forRoot}),
+          returnValue: Future<T?>.value()) as _i3.Future<T?>);
+  @override
+  _i3.Future<T?> pushNamed<T extends Object?>(String? routeName,
+          {Object? arguments, bool? forRoot = false}) =>
+      (super.noSuchMethod(
+          Invocation.method(#pushNamed, [routeName],
+              {#arguments: arguments, #forRoot: forRoot}),
+          returnValue: Future<T?>.value()) as _i3.Future<T?>);
+  @override
+  _i3.Future<T?> pushNamedAndRemoveUntil<T extends Object?>(
+          String? newRouteName, bool Function(_i7.Route<dynamic>)? predicate,
+          {Object? arguments, bool? forRoot = false}) =>
+      (super.noSuchMethod(
+          Invocation.method(#pushNamedAndRemoveUntil, [newRouteName, predicate],
+              {#arguments: arguments, #forRoot: forRoot}),
+          returnValue: Future<T?>.value()) as _i3.Future<T?>);
+  @override
+  _i3.Future<T?> pushReplacementNamed<T extends Object?, TO extends Object?>(
+          String? routeName,
+          {TO? result,
+          Object? arguments,
+          bool? forRoot = false}) =>
+      (super.noSuchMethod(
+          Invocation.method(#pushReplacementNamed, [routeName],
+              {#result: result, #arguments: arguments, #forRoot: forRoot}),
+          returnValue: Future<T?>.value()) as _i3.Future<T?>);
+  @override
+  void pop<T extends Object?>([T? result]) =>
+      super.noSuchMethod(Invocation.method(#pop, [result]),
+          returnValueForMissingStub: null);
+  @override
+  bool canPop() =>
+      (super.noSuchMethod(Invocation.method(#canPop, []), returnValue: false)
+          as bool);
+  @override
+  _i3.Future<bool> maybePop<T extends Object?>([T? result]) =>
+      (super.noSuchMethod(Invocation.method(#maybePop, [result]),
+          returnValue: Future<bool>.value(false)) as _i3.Future<bool>);
+  @override
+  void popUntil(bool Function(_i7.Route<dynamic>)? predicate) =>
+      super.noSuchMethod(Invocation.method(#popUntil, [predicate]),
+          returnValueForMissingStub: null);
+  @override
+  void navigate(String? path, {dynamic arguments}) => super.noSuchMethod(
+      Invocation.method(#navigate, [path], {#arguments: arguments}),
+      returnValueForMissingStub: null);
+  @override
+  void setObservers(List<_i7.NavigatorObserver>? navigatorObservers) =>
+      super.noSuchMethod(Invocation.method(#setObservers, [navigatorObservers]),
+          returnValueForMissingStub: null);
+  @override
+  void setNavigatorKey(_i7.GlobalKey<_i7.NavigatorState>? navigatorkey) =>
+      super.noSuchMethod(Invocation.method(#setNavigatorKey, [navigatorkey]),
+          returnValueForMissingStub: null);
+  @override
+  void addListener(_i8.VoidCallback? listener) =>
+      super.noSuchMethod(Invocation.method(#addListener, [listener]),
+          returnValueForMissingStub: null);
+  @override
+  void removeListener(_i8.VoidCallback? listener) =>
+      super.noSuchMethod(Invocation.method(#removeListener, [listener]),
           returnValueForMissingStub: null);
 }

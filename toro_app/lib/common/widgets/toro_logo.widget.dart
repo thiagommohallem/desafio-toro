@@ -7,7 +7,7 @@ class ToroLogoWidget extends StatelessWidget {
     this.width = 70,
     this.height = 70,
     Key? key,
-  }) : super(key: key);
+  }) : super(key: key); // coverage:ignore-line
 
   @override
   Widget build(BuildContext context) {

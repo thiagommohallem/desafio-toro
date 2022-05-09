@@ -8,6 +8,8 @@ void main() {
   setUpAll(() {
     _loginDatasource = MockLoginDatasource();
   });
+
+  tearDownAll(() => _loginDatasource.dispose());
   group("MockLoginDatasource tests...", () {
     test('Should return valid map on success', () async {
       final result = await _loginDatasource.signIn(

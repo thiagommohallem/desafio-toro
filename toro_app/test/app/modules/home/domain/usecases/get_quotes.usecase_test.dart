@@ -29,7 +29,7 @@ void main() {
           .thenAnswer((_) async => Stream.fromIterable(_stocks));
       List<StockQuote> stockQuotes = [];
       final stream = await _usecase();
-      int count = 1;
+      int count = 0;
       stream.listen((event) {
         count++;
         stockQuotes = event;

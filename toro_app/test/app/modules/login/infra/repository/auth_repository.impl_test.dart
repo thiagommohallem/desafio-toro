@@ -39,5 +39,12 @@ void main() {
       result.fold((l) => expect(l.runtimeType, UserNotFoundException),
           (r) => expect(r, null));
     });
+
+    testWidgets('Should call datasource dispose when disposed', (tester) async {
+      when(_dataSourceMock.dispose()).thenAnswer((_) async => true);
+
+      await _authRepository.dispose();
+      verify(_dataSourceMock.dispose()).called(1);
+    });
   });
 }
