@@ -3,12 +3,18 @@ class StockQuote {
   double currentPrince;
   final double openPrice;
   double valuation;
-  StockQuote({
-    required this.stockId,
-    required this.currentPrince,
-    required this.openPrice,
-    required this.valuation,
-  });
+  List<PriceHistory> priceHistory;
+  final DateTime timestamp;
+
+  StockQuote(
+      {required this.stockId,
+      required this.currentPrince,
+      required this.openPrice,
+      required this.valuation,
+      required this.timestamp})
+      : priceHistory = [
+          PriceHistory(timestamp: timestamp, price: currentPrince)
+        ];
 
   @override
   bool operator ==(Object other) {
@@ -20,4 +26,11 @@ class StockQuote {
   int get hashCode {
     return stockId.hashCode;
   }
+}
+
+class PriceHistory {
+  final DateTime timestamp;
+  final double price;
+
+  PriceHistory({required this.timestamp, required this.price});
 }
