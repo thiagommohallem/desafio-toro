@@ -12,7 +12,8 @@ class Stock {
     return Stock(
       id: json['id'],
       value: json['value'],
-      timestamp: DateTime.fromMillisecondsSinceEpoch((json['timestamp'])),
+      timestamp:
+          DateTime.fromMillisecondsSinceEpoch((json['timestamp']) * 1000),
     );
   }
 }
