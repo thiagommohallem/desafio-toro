@@ -24,7 +24,7 @@ class QuotesDatasourceImpl implements QuotesDatasource {
       Map<String, dynamic> stockAsMap = {
         'id': stockName,
         'value': stockValue,
-        'timestamp': timestamp.toInt(),
+        'timestamp': timestamp.toInt() * 1000,
       };
 
       _streamController.sink.add(stockAsMap);
