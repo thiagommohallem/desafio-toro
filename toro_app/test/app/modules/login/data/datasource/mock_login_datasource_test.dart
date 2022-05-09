@@ -31,7 +31,7 @@ void main() {
         () async {
       expect(
         () async => await _loginDatasource.signIn(
-            login: "incorreto@gmail.com", password: "123456"),
+            login: "valido@gmail.com", password: "143456"),
         throwsA(isA<IncorrectPasswordException>()),
       );
     });

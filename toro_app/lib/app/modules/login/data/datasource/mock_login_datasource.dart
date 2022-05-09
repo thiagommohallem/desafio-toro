@@ -7,11 +7,12 @@ class MockLoginDatasource implements AuthDatasource {
       {required String login, required String password}) async {
     await Future.delayed(const Duration(seconds: 2));
     if (login == 'valido@gmail.com') {
+      if (password != '123456') {
+        throw IncorrectPasswordException(message: "Senha incorreta");
+      }
       return Future.value({'name': 'Thiago', 'id': '123'});
     } else if (login == "banido@gmail.com") {
       return Future.value({'name': 'Thiago', 'id': '999'});
-    } else if (login == 'incorreto@gmail.com') {
-      throw IncorrectPasswordException(message: "Senha incorreta");
     } else {
       throw UserNotFoundException(
           message: "Não encontramos um usuário cadastrado com esse e-mail");
