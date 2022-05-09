@@ -2,10 +2,10 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:toro_app/app/modules/login/domain/errors/auth_exception.dart';
 import 'package:toro_app/app/modules/login/domain/model/user.model.dart';
-import 'package:toro_app/app/modules/login/domain/usecases/sign_in.usecase.dart';
-import 'package:toro_app/app/modules/login/ui/cubit/sign_in_cubit.dart';
+import 'package:toro_app/app/modules/login/domain/usecases/sign_in.usecase.impl.dart';
+import 'package:toro_app/app/modules/login/presenters/cubits/sign_in_cubit.dart';
 
-class MockSignInUsecase implements SignInUsecase {
+class MockSignInUsecase implements SignInUsecaseImpl {
   @override
   Future<Either<AuthException, User>> signIn(
       {String? email, String? password}) {

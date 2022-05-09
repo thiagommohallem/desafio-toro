@@ -7,7 +7,7 @@ import 'package:modular_test/modular_test.dart';
 import 'package:toro_app/app/modules/login/domain/errors/auth_exception.dart';
 import 'package:toro_app/app/modules/login/domain/model/user.model.dart';
 import 'package:toro_app/app/modules/login/module/login.module.dart';
-import 'package:toro_app/app/modules/login/ui/cubit/sign_in_cubit.dart';
+import 'package:toro_app/app/modules/login/presenters/cubits/sign_in_cubit.dart';
 import 'package:toro_app/app/modules/login/ui/login.page.dart';
 import 'package:toro_app/common/widgets/toro_elevated_button.widget.dart';
 import 'package:toro_app/common/widgets/toro_error_alert_dialog.widget.dart';

@@ -5,17 +5,17 @@ import 'package:mockito/mockito.dart';
 import 'package:toro_app/app/modules/login/domain/errors/auth_exception.dart';
 import 'package:toro_app/app/modules/login/domain/infra/auth_repository.dart';
 import 'package:toro_app/app/modules/login/domain/model/user.model.dart';
-import 'package:toro_app/app/modules/login/domain/usecases/sign_in.usecase.dart';
+import 'package:toro_app/app/modules/login/domain/usecases/sign_in.usecase.impl.dart';
 
 import 'sign_in.usecase_test.mocks.dart';
 
 @GenerateMocks([AuthRepository])
 void main() {
-  late final SignInUsecase _usecase;
+  late final SignInUsecaseImpl _usecase;
   final MockAuthRepository _repositoryMock = MockAuthRepository();
 
   setUpAll(() {
-    _usecase = SignInUsecase(_repositoryMock);
+    _usecase = SignInUsecaseImpl(_repositoryMock);
   });
   group("SignInUsecase tests...", () {
     test('Should return BannedUserException if user has an id 999...',

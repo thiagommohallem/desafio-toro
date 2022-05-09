@@ -11,7 +11,8 @@ import 'package:flutter_modular/src/presenter/models/modular_navigator.dart'
     as _i5;
 import 'package:flutter_modular/src/presenter/models/route.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:toro_app/app/modules/login/ui/cubit/sign_in_cubit.dart' as _i2;
+import 'package:toro_app/app/modules/login/presenters/cubits/sign_in_cubit.dart'
+    as _i2;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values

@@ -3,16 +3,11 @@ import 'package:dartz/dartz.dart';
 import 'package:toro_app/app/modules/login/domain/errors/auth_exception.dart';
 import 'package:toro_app/app/modules/login/domain/infra/auth_repository.dart';
 import 'package:toro_app/app/modules/login/domain/model/user.model.dart';
+import 'package:toro_app/app/modules/login/presenters/usecases/sign_in.usecase.dart';
 
-abstract class ISignInUsecase {
-  Future<Either<AuthException, User>> signIn(
-      {required String email, required String password});
-  dispose();
-}
-
-class SignInUsecase implements ISignInUsecase {
+class SignInUsecaseImpl implements ISignInUsecase {
   final AuthRepository _repository;
-  SignInUsecase(
+  SignInUsecaseImpl(
     this._repository,
   );
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:toro_app/app/modules/login/helpers/email_validator.dart';
-import 'package:toro_app/app/modules/login/ui/cubit/sign_in_cubit.dart';
+import 'package:toro_app/app/modules/login/presenters/cubits/sign_in_cubit.dart';
+import 'package:toro_app/app/modules/login/ui/helpers/email_validator.dart';
 import 'package:toro_app/colors.dart';
 import 'package:toro_app/common/widgets/toro_elevated_button.widget.dart';
 import 'package:toro_app/common/widgets/toro_error_alert_dialog.widget.dart';

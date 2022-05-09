@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:toro_app/app/modules/login/helpers/email_validator.dart';
+import 'package:toro_app/app/modules/login/ui/helpers/email_validator.dart';
 
 void main() {
   group('Email validator tests...', () {
