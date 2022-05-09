@@ -1,6 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:toro_app/app/modules/onboarding/ui/cubits/page_index.cubit.dart';
+import 'package:toro_app/app/modules/onboarding/presenters/cubits/page_index.cubit.dart';
 
 void main() {
   group("PageIndexCubit tests...", () {

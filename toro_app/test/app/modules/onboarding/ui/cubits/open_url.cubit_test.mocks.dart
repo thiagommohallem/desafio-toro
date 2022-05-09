@@ -8,7 +8,7 @@ import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:toro_app/app/modules/onboarding/domain/errors/open_url_exception.dart'
     as _i5;
-import 'package:toro_app/app/modules/onboarding/domain/usecases/open_url.usecase.dart'
+import 'package:toro_app/app/modules/onboarding/presenters/usecases/open_url.usecase.dart'
     as _i3;
 
 // ignore_for_file: type=lint

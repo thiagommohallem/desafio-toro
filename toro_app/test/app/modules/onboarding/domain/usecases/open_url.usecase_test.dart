@@ -4,18 +4,18 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:toro_app/app/modules/onboarding/domain/errors/open_url_exception.dart';
 import 'package:toro_app/app/modules/onboarding/domain/infra/open_url.service.dart';
-import 'package:toro_app/app/modules/onboarding/domain/usecases/open_url.usecase.dart';
+import 'package:toro_app/app/modules/onboarding/domain/usecases/open_url.usecase.impl.dart';
 
 import 'open_url.usecase_test.mocks.dart';
 
 @GenerateMocks([OpenUrlService])
 void main() {
-  late OpenUrlUsecase _usecase;
+  late OpenUrlUsecaseImpl _usecase;
   late MockOpenUrlService _mockOpenUrlService;
 
   setUpAll(() {
     _mockOpenUrlService = MockOpenUrlService();
-    _usecase = OpenUrlUsecase(_mockOpenUrlService);
+    _usecase = OpenUrlUsecaseImpl(_mockOpenUrlService);
   });
 
   tearDownAll(() => _usecase.dispose());

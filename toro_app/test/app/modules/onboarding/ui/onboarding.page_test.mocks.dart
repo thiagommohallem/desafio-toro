@@ -11,7 +11,7 @@ import 'package:flutter_modular/src/presenter/models/modular_navigator.dart'
     as _i5;
 import 'package:flutter_modular/src/presenter/models/route.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:toro_app/app/modules/onboarding/ui/cubits/open_url_cubit.dart'
+import 'package:toro_app/app/modules/onboarding/presenters/cubits/open_url_cubit.dart'
     as _i2;
 
 // ignore_for_file: type=lint

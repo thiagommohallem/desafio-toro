@@ -1,6 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:toro_app/app/modules/onboarding/ui/cubits/splash_logo_opacity.cubit.dart';
+import 'package:toro_app/app/modules/onboarding/presenters/cubits/splash_logo_opacity.cubit.dart';
 
 void main() {
   group("SplashTextOpacityCubit tests...", () {

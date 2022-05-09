@@ -4,8 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:toro_app/app/modules/onboarding/domain/errors/open_url_exception.dart';
-import 'package:toro_app/app/modules/onboarding/domain/usecases/open_url.usecase.dart';
-import 'package:toro_app/app/modules/onboarding/ui/cubits/open_url_cubit.dart';
+import 'package:toro_app/app/modules/onboarding/presenters/cubits/open_url_cubit.dart';
+import 'package:toro_app/app/modules/onboarding/presenters/usecases/open_url.usecase.dart';
 
 import 'open_url.cubit_test.mocks.dart';
 

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:toro_app/app/modules/onboarding/domain/usecases/open_url.usecase.dart';
+import 'package:toro_app/app/modules/onboarding/presenters/usecases/open_url.usecase.dart';
 
 part 'open_url_state.dart';
 
