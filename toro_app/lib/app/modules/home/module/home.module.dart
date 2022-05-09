@@ -1,10 +1,11 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:toro_app/app/modules/home/data/datasource/quotes.datasource.impl.dart';
 import 'package:toro_app/app/modules/home/domain/infra/quotes.repository.dart';
-import 'package:toro_app/app/modules/home/domain/usecases/get_quotes.usecase.dart';
+import 'package:toro_app/app/modules/home/domain/usecases/get_quotes.usecase.impl.dart';
 import 'package:toro_app/app/modules/home/infra/datasources/quotes.datasource.dart';
 import 'package:toro_app/app/modules/home/infra/repository/quotes.repository.impl.dart';
-import 'package:toro_app/app/modules/home/ui/bloc/quotes_bloc.dart';
+import 'package:toro_app/app/modules/home/presenters/blocs/quotes_bloc.dart';
+import 'package:toro_app/app/modules/home/presenters/usecases/get_quotes.usecase.dart';
 import 'package:toro_app/app/modules/home/ui/home.page.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
@@ -18,7 +19,7 @@ class HomeModule extends Module {
   ];
 
   static final List<Bind> _usecasesBinds = [
-    Bind.lazySingleton<IGetQuotesUsecase>((i) => GetQuotesUsecase(i())),
+    Bind.lazySingleton<IGetQuotesUsecase>((i) => GetQuotesUsecaseImpl(i())),
   ];
 
   static final List<Bind> _blocBinds = [

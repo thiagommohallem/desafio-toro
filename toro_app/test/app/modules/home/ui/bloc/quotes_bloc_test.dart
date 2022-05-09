@@ -3,12 +3,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:toro_app/app/modules/home/domain/models/stock_quote.model.dart';
-import 'package:toro_app/app/modules/home/domain/usecases/get_quotes.usecase.dart';
-import 'package:toro_app/app/modules/home/ui/bloc/quotes_bloc.dart';
+import 'package:toro_app/app/modules/home/domain/usecases/get_quotes.usecase.impl.dart';
+import 'package:toro_app/app/modules/home/presenters/blocs/quotes_bloc.dart';
 
 import 'quotes_bloc_test.mocks.dart';
 
-@GenerateMocks([GetQuotesUsecase])
+@GenerateMocks([GetQuotesUsecaseImpl])
 void main() {
   final MockGetQuotesUsecase _usecaseMock = MockGetQuotesUsecase();
 

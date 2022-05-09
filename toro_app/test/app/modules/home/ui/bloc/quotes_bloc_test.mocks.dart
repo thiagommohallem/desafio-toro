@@ -7,7 +7,7 @@ import 'dart:async' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:toro_app/app/modules/home/domain/models/stock_quote.model.dart'
     as _i3;
-import 'package:toro_app/app/modules/home/domain/usecases/get_quotes.usecase.dart'
+import 'package:toro_app/app/modules/home/domain/usecases/get_quotes.usecase.impl.dart'
     as _i2;
 
 // ignore_for_file: type=lint
@@ -23,7 +23,8 @@ import 'package:toro_app/app/modules/home/domain/usecases/get_quotes.usecase.dar
 /// A class which mocks [GetQuotesUsecase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetQuotesUsecase extends _i1.Mock implements _i2.GetQuotesUsecase {
+class MockGetQuotesUsecase extends _i1.Mock
+    implements _i2.GetQuotesUsecaseImpl {
   MockGetQuotesUsecase() {
     _i1.throwOnMissingStub(this);
   }

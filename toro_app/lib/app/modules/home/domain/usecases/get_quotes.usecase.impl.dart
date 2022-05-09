@@ -2,16 +2,12 @@ import 'dart:async';
 
 import 'package:toro_app/app/modules/home/domain/infra/quotes.repository.dart';
 import 'package:toro_app/app/modules/home/domain/models/stock_quote.model.dart';
+import 'package:toro_app/app/modules/home/presenters/usecases/get_quotes.usecase.dart';
 
-abstract class IGetQuotesUsecase {
-  Future<Stream<List<StockQuote>>> call();
-  dispose();
-}
-
-class GetQuotesUsecase implements IGetQuotesUsecase {
+class GetQuotesUsecaseImpl implements IGetQuotesUsecase {
   final QuotesRepository _quotesRepository;
 
-  GetQuotesUsecase(this._quotesRepository);
+  GetQuotesUsecaseImpl(this._quotesRepository);
 
   List<StockQuote> stockQuotes = [];
 

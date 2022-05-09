@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:toro_app/app/modules/home/domain/models/stock_quote.model.dart';
-import 'package:toro_app/app/modules/home/ui/bloc/quotes_bloc.dart';
+import 'package:toro_app/app/modules/home/presenters/blocs/quotes_bloc.dart';
 import 'package:toro_app/app/modules/home/widgets/stock_line_chart.widget.dart';
 import 'package:toro_app/colors.dart';
 import 'package:toro_app/common/widgets/toro_logo.widget.dart';

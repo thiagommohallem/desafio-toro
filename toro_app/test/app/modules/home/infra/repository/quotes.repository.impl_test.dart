@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:toro_app/app/modules/home/domain/models/stock.model.dart';
+import 'package:toro_app/app/modules/home/infra/entity/stock.entity.dart';
 import 'package:toro_app/app/modules/home/infra/datasources/quotes.datasource.dart';
 import 'package:toro_app/app/modules/home/infra/repository/quotes.repository.impl.dart';
 

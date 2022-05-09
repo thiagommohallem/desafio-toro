@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:toro_app/app/modules/home/domain/models/stock.model.dart';
+import 'package:toro_app/app/modules/home/infra/entity/stock.entity.dart';
 
 void main() {
   group('Stock model tests ...', () {

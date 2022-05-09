@@ -7,7 +7,7 @@ import 'dart:async' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:toro_app/app/modules/home/domain/infra/quotes.repository.dart'
     as _i2;
-import 'package:toro_app/app/modules/home/domain/models/stock.model.dart'
+import 'package:toro_app/app/modules/home/infra/entity/stock.entity.dart'
     as _i4;
 
 // ignore_for_file: type=lint

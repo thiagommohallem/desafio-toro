@@ -2,19 +2,19 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:toro_app/app/modules/home/domain/infra/quotes.repository.dart';
-import 'package:toro_app/app/modules/home/domain/models/stock.model.dart';
+import 'package:toro_app/app/modules/home/infra/entity/stock.entity.dart';
 import 'package:toro_app/app/modules/home/domain/models/stock_quote.model.dart';
-import 'package:toro_app/app/modules/home/domain/usecases/get_quotes.usecase.dart';
+import 'package:toro_app/app/modules/home/domain/usecases/get_quotes.usecase.impl.dart';
 
 import 'get_quotes.usecase_test.mocks.dart';
 
 @GenerateMocks([QuotesRepository])
 void main() {
-  late final GetQuotesUsecase _usecase;
+  late final GetQuotesUsecaseImpl _usecase;
   final MockQuotesRepository _mockRepository = MockQuotesRepository();
 
   setUpAll(() {
-    _usecase = GetQuotesUsecase(_mockRepository);
+    _usecase = GetQuotesUsecaseImpl(_mockRepository);
   });
 
   List<Stock> _stocks = [

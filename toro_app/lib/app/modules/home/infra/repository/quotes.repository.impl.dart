@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:toro_app/app/modules/home/domain/infra/quotes.repository.dart';
-import 'package:toro_app/app/modules/home/domain/models/stock.model.dart';
+import 'package:toro_app/app/modules/home/infra/entity/stock.entity.dart';
 import 'package:toro_app/app/modules/home/infra/datasources/quotes.datasource.dart';
 
 class QuotesRepositoryImpl implements QuotesRepository {
