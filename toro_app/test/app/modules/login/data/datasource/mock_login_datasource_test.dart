@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:toro_app/app/modules/login/data/datasource/mock_login_datasource.dart';
-import 'package:toro_app/app/modules/login/domain/Errors/auth_exception.dart';
+import 'package:toro_app/app/modules/login/domain/errors/auth_exception.dart';
 
 void main() {
   late final MockLoginDatasource _loginDatasource;

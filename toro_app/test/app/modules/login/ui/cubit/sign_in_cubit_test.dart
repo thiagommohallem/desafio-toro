@@ -1,6 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:toro_app/app/modules/login/domain/Errors/auth_exception.dart';
+import 'package:toro_app/app/modules/login/domain/errors/auth_exception.dart';
 import 'package:toro_app/app/modules/login/domain/model/user.model.dart';
 import 'package:toro_app/app/modules/login/domain/usecases/sign_in.usecase.dart';
 import 'package:toro_app/app/modules/login/ui/cubit/sign_in_cubit.dart';

@@ -6,10 +6,11 @@ import 'dart:async' as _i4;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:toro_app/app/modules/login/domain/Errors/auth_exception.dart';
+import 'package:toro_app/app/modules/login/domain/errors/auth_exception.dart'
+    as _i5;
 import 'package:toro_app/app/modules/login/domain/infra/auth_repository.dart'
     as _i3;
-import 'package:toro_app/app/modules/login/domain/model/user.model.dart' as _i5;
+import 'package:toro_app/app/modules/login/domain/model/user.model.dart' as _i6;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -32,11 +33,11 @@ class MockAuthRepository extends _i1.Mock implements _i3.AuthRepository {
   }
 
   @override
-  _i4.Future<_i2.Either<AuthException, _i5.User>> signIn(
+  _i4.Future<_i2.Either<_i5.AuthException, _i6.User>> signIn(
           {String? email, String? password}) =>
       (super.noSuchMethod(
           Invocation.method(#signIn, [], {#email: email, #password: password}),
-          returnValue: Future<_i2.Either<AuthException, _i5.User>>.value(
-              _FakeEither_0<AuthException, _i5.User>())) as _i4
-          .Future<_i2.Either<AuthException, _i5.User>>);
+          returnValue: Future<_i2.Either<_i5.AuthException, _i6.User>>.value(
+              _FakeEither_0<_i5.AuthException, _i6.User>())) as _i4
+          .Future<_i2.Either<_i5.AuthException, _i6.User>>);
 }

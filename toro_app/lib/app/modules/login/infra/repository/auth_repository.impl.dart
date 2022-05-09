@@ -1,4 +1,4 @@
-import 'package:toro_app/app/modules/login/domain/Errors/auth_exception.dart';
+import 'package:toro_app/app/modules/login/domain/errors/auth_exception.dart';
 import 'package:dartz/dartz.dart';
 import 'package:toro_app/app/modules/login/domain/infra/auth_repository.dart';
 import 'package:toro_app/app/modules/login/domain/model/user.model.dart';

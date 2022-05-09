@@ -1,4 +1,4 @@
-import 'package:toro_app/app/modules/login/domain/Errors/auth_exception.dart';
+import 'package:toro_app/app/modules/login/domain/errors/auth_exception.dart';
 import 'package:toro_app/app/modules/login/infra/datasources/auth_datasource.dart';
 
 class MockLoginDatasource implements AuthDatasource {

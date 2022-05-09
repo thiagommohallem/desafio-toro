@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:toro_app/app/modules/login/domain/Errors/auth_exception.dart';
+import 'package:toro_app/app/modules/login/domain/errors/auth_exception.dart';
 import 'package:toro_app/app/modules/login/domain/model/user.model.dart';
 import 'package:toro_app/app/modules/login/infra/datasources/auth_datasource.dart';
 import 'package:toro_app/app/modules/login/infra/repository/auth_repository.impl.dart';
