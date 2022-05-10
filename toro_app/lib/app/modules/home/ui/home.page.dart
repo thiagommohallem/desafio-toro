@@ -3,11 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:toro_app/app/modules/home/domain/models/stock_quote.model.dart';
 import 'package:toro_app/app/modules/home/presenters/blocs/quotes_bloc.dart';
-import 'package:toro_app/app/modules/home/ui/widgets/stock_line_chart.widget.dart';
+import 'package:toro_app/app/modules/home/ui/widgets/stock_card.widget.dart';
 import 'package:toro_app/colors.dart';
-import 'package:toro_app/common/widgets/toro_error_alert_dialog.widget.dart';
-import 'package:toro_app/common/widgets/toro_logo.widget.dart';
-import 'package:toro_app/common/widgets/toro_text.widget.dart';
+import 'package:toro_app/common/widgets/toro_circular_progress_indicator.widget.dart';
+import 'package:toro_app/common/widgets/toro_row_with_logo_and_text.widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -32,20 +31,9 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
-          title: _logoAndToroText(),
+          title: const ToroRowWithLogoAndTextWidget(),
           elevation: 0.0,
-          bottom: TabBar(
-              indicatorPadding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-              indicatorSize: TabBarIndicatorSize.label,
-              unselectedLabelColor: Colors.black54,
-              indicator: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                color: toroPrimaryColor,
-              ),
-              tabs: [
-                _appBarTab("Melhor Valorização"),
-                _appBarTab("Pior Valorização"),
-              ]),
+          bottom: _tabBar(),
         ),
         body: Padding(
           padding: const EdgeInsets.only(
@@ -53,39 +41,25 @@ class _HomePageState extends State<HomePage> {
             right: 16,
             top: 16,
           ),
-          child: BlocBuilder<QuotesBloc, QuotesState>(
-            bloc: _quotesBloc,
-            builder: (_, state) {
-              if (state is StockReceivedError) {
-                WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
-                  showDialog(
-                      context: context,
-                      builder: (_) {
-                        return ToroErrorAlertDialog(
-                            text: Text(state.exception.message));
-                      });
-                });
-              }
-
-              return TabBarView(children: [
-                if (state is StockReceivedSuccess) ...[
-                  _stockListViewTop5(state.stockQuotes),
-                ] else ...[
-                  const Center(
-                      child: CircularProgressIndicator(color: toroPrimaryColor))
-                ],
-                if (state is StockReceivedSuccess) ...[
-                  _stockListViewTop5(state.stockQuotes,
-                      isAscendingOrder: false),
-                ] else ...[
-                  const Center(
-                      child: CircularProgressIndicator(color: toroPrimaryColor))
-                ]
-              ]);
-            },
-          ),
+          child: _body(context),
         ),
       ),
+    );
+  }
+
+  TabBar _tabBar() {
+    return TabBar(
+      indicatorPadding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+      indicatorSize: TabBarIndicatorSize.label,
+      unselectedLabelColor: Colors.black54,
+      indicator: BoxDecoration(
+        borderRadius: BorderRadius.circular(50),
+        color: toroPrimaryColor,
+      ),
+      tabs: [
+        _appBarTab("Melhor Valorização"),
+        _appBarTab("Pior Valorização"),
+      ],
     );
   }
 
@@ -103,13 +77,36 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  BlocBuilder<QuotesBloc, QuotesState> _body(BuildContext context) {
+    return BlocBuilder<QuotesBloc, QuotesState>(
+      bloc: _quotesBloc,
+      builder: (_, state) {
+        return TabBarView(children: [
+          if (state is StockReceivedSuccess) ...[
+            _stockListViewTop5(state.stockQuotes),
+            _stockListViewTop5(
+              state.stockQuotes,
+              showMostValuablesStocks: false,
+            ),
+          ] else if (state is StockReceivedError) ...[
+            _connectionErrorText(state.exception.message),
+            _connectionErrorText(state.exception.message),
+          ] else ...[
+            _loading(),
+            _loading(),
+          ],
+        ]);
+      },
+    );
+  }
+
   Widget _stockListViewTop5(List<StockQuote> stockQuotes,
-      {bool isAscendingOrder = true}) {
+      {bool showMostValuablesStocks = true}) {
     return ListView.builder(
       itemCount: stockQuotes.length < 5 ? stockQuotes.length : 5,
       itemBuilder: (_, index) {
         late final StockQuote stockQuote;
-        if (isAscendingOrder) {
+        if (showMostValuablesStocks) {
           stockQuote = stockQuotes[index];
         } else {
           stockQuote = stockQuotes[stockQuotes.length - index - 1];
@@ -117,96 +114,25 @@ class _HomePageState extends State<HomePage> {
         return Padding(
           padding: const EdgeInsets.only(top: 10),
           child: Center(
-            child: _stockCard(stockQuote),
+            child: StockCard(stockQuote: stockQuote),
           ),
         );
       },
     );
   }
 
-  Card _stockCard(StockQuote stockQuote) {
-    return Card(
-      elevation: 5.0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(26)),
-      child: Container(
-        padding: const EdgeInsets.all(24.0),
-        height: 130,
-        width: double.infinity,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              width: 80,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    stockQuote.stockId,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 20),
-                  ),
-                  const Spacer(),
-                  FittedBox(
-                    child: Text(
-                        "R\$" + stockQuote.currentPrince.toStringAsFixed(2),
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20)),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            SizedBox(
-              width: 110,
-              child: StockLineChart(stockQuote: stockQuote),
-            ),
-            const Spacer(),
-            const SizedBox(
-              width: 7,
-            ),
-            SizedBox(
-              width: 80,
-              child: Center(
-                child: FittedBox(
-                  child: Text(
-                    stockQuote.valuation > 0
-                        ? "+" + stockQuote.valuation.toStringAsFixed(2) + "%"
-                        : stockQuote.valuation.toStringAsFixed(2) + "%",
-                    style: TextStyle(
-                      color:
-                          stockQuote.valuation > 0 ? Colors.green : Colors.red,
-                      fontSize: 20,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
+  Center _connectionErrorText(String error) {
+    return Center(
+      child: Text(
+        "$error\n\nReinicie a aplicação para tentar novamente",
+        textAlign: TextAlign.center,
+        style: const TextStyle(fontSize: 20),
       ),
     );
   }
 
-  Row _logoAndToroText() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: const [
-        ToroLogoWidget(
-          width: 40,
-          height: 40,
-        ),
-        SizedBox(
-          width: 10,
-        ),
-        ToroTextWidget(
-          width: 110,
-          height: 40,
-        )
-      ],
-    );
-  }
+  Center _loading() =>
+      const Center(child: ToroCircularProgressIndicatorWidget());
 
   @override
   void dispose() {

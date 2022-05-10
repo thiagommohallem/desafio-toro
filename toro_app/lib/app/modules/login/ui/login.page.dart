@@ -6,8 +6,7 @@ import 'package:toro_app/app/modules/login/ui/helpers/email_validator.dart';
 import 'package:toro_app/colors.dart';
 import 'package:toro_app/common/widgets/toro_elevated_button.widget.dart';
 import 'package:toro_app/common/widgets/toro_error_alert_dialog.widget.dart';
-import 'package:toro_app/common/widgets/toro_logo.widget.dart';
-import 'package:toro_app/common/widgets/toro_text.widget.dart';
+import 'package:toro_app/common/widgets/toro_row_with_logo_and_text.widget.dart';
 import 'package:toro_app/common/widgets/toro_text_form_field.widget.dart';
 
 class LoginPage extends StatefulWidget {
@@ -38,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
               hasScrollBody: false,
               child: Column(
                 children: [
-                  _logoAndToroText(),
+                  const ToroRowWithLogoAndTextWidget(),
                   const SizedBox(
                     height: 30,
                   ),
@@ -59,25 +58,6 @@ class _LoginPageState extends State<LoginPage> {
           ]),
         ),
       ),
-    );
-  }
-
-  Row _logoAndToroText() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: const [
-        ToroLogoWidget(
-          width: 40,
-          height: 40,
-        ),
-        SizedBox(
-          width: 10,
-        ),
-        ToroTextWidget(
-          width: 110,
-          height: 40,
-        )
-      ],
     );
   }
 

@@ -12,8 +12,7 @@ import 'package:toro_app/colors.dart';
 import 'package:toro_app/common/utils/media_query_converter.dart';
 import 'package:toro_app/common/widgets/toro_elevated_button.widget.dart';
 import 'package:toro_app/common/widgets/toro_error_alert_dialog.widget.dart';
-import 'package:toro_app/common/widgets/toro_logo.widget.dart';
-import 'package:toro_app/common/widgets/toro_text.widget.dart';
+import 'package:toro_app/common/widgets/toro_row_with_logo_and_text.widget.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({Key? key}) : super(key: key);
@@ -53,7 +52,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  _logoAndToroText(),
+                  const ToroRowWithLogoAndTextWidget(
+                    logoWidth: 50,
+                    logoHeight: 50,
+                    textHeight: 50,
+                    textWidth: 150,
+                  ),
                   const Spacer(),
                   _onboardingPageView(context),
                   const SizedBox(height: 24),
@@ -75,25 +79,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
           );
         },
       ),
-    );
-  }
-
-  Row _logoAndToroText() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: const [
-        ToroLogoWidget(
-          width: 50,
-          height: 50,
-        ),
-        SizedBox(
-          width: 10,
-        ),
-        ToroTextWidget(
-          width: 150,
-          height: 50,
-        )
-      ],
     );
   }
 
