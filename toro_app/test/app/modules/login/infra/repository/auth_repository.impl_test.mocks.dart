@@ -2,11 +2,12 @@
 // in toro_app/test/app/modules/login/infra/repository/auth_repository.impl_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i3;
+import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:toro_app/app/modules/login/domain/model/user.model.dart' as _i2;
 import 'package:toro_app/app/modules/login/infra/datasources/auth_datasource.dart'
-    as _i2;
+    as _i3;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -18,19 +19,20 @@ import 'package:toro_app/app/modules/login/infra/datasources/auth_datasource.dar
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 
+class _FakeUser_0 extends _i1.Fake implements _i2.User {}
+
 /// A class which mocks [AuthDatasource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthDatasource extends _i1.Mock implements _i2.AuthDatasource {
+class MockAuthDatasource extends _i1.Mock implements _i3.AuthDatasource {
   MockAuthDatasource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i3.Future<Map<String, dynamic>> signIn({String? login, String? password}) =>
+  _i4.Future<_i2.User> signIn({String? login, String? password}) =>
       (super.noSuchMethod(
           Invocation.method(#signIn, [], {#login: login, #password: password}),
           returnValue:
-              Future<Map<String, dynamic>>.value(<String, dynamic>{})) as _i3
-          .Future<Map<String, dynamic>>);
+              Future<_i2.User>.value(_FakeUser_0())) as _i4.Future<_i2.User>);
 }

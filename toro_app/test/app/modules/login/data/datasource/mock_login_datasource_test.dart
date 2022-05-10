@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:toro_app/app/modules/login/data/datasource/mock_login_datasource.dart';
 import 'package:toro_app/app/modules/login/domain/errors/auth_exception.dart';
+import 'package:toro_app/app/modules/login/domain/model/user.model.dart';
 
 void main() {
   late final MockLoginDatasource _loginDatasource;
@@ -14,7 +15,7 @@ void main() {
     test('Should return valid map on success', () async {
       final result = await _loginDatasource.signIn(
           login: "valido@gmail.com", password: "123456");
-      expect(result, isA<Map>());
+      expect(result, isA<User>());
     });
 
     test('Should throw UserNotFoundException on error when user is not found',
@@ -40,8 +41,8 @@ void main() {
         () async {
       final result = await _loginDatasource.signIn(
           login: "banido@gmail.com", password: "123456");
-      expect(result, isA<Map>());
-      expect(result['id'], '999');
+      expect(result, isA<User>());
+      expect(result.id, '999');
     });
   });
 }

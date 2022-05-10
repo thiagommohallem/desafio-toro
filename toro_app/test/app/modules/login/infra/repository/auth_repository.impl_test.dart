@@ -13,7 +13,7 @@ void main() {
   final _dataSourceMock = MockAuthDatasource();
   late final AuthRepositoryImpl _authRepository;
 
-  final _userMapMock = {'name': 'Thiago', 'id': '123'};
+  final _userMock = User('Thiago', '123');
 
   setUpAll(() {
     _authRepository = AuthRepositoryImpl(_dataSourceMock);
@@ -22,7 +22,7 @@ void main() {
     testWidgets('Should return User on success', (tester) async {
       when(_dataSourceMock.signIn(
               login: anyNamed('login'), password: anyNamed('password')))
-          .thenAnswer((realInvocation) async => _userMapMock);
+          .thenAnswer((realInvocation) async => _userMock);
 
       final result =
           await _authRepository.signIn(email: 'email', password: 'password');

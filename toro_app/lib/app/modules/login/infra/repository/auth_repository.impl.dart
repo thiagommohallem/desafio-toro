@@ -13,9 +13,8 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<AuthException, User>> signIn(
       {required String email, required String password}) async {
     try {
-      final userAsMap =
-          await _datasource.signIn(login: email, password: password);
-      return Right(User.fromJson(userAsMap));
+      final user = await _datasource.signIn(login: email, password: password);
+      return Right(user);
     } on AuthException catch (e) {
       return Left(e);
     }
