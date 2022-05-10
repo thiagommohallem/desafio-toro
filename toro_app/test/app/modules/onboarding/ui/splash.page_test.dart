@@ -5,7 +5,6 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:modular_test/modular_test.dart';
 import 'package:toro_app/app/app_module.dart';
-import 'package:toro_app/app/modules/onboarding/module/onboarding.module.dart';
 import 'package:toro_app/app/splash/presenter/splash_logo_opacity.cubit.dart';
 import 'package:toro_app/app/splash/ui/splash.page.dart';
 import 'package:toro_app/common/widgets/toro_logo.widget.dart';
