@@ -33,6 +33,8 @@ Caso queira rodar o projeto em modo release, execute: `flutter run --release`
 
 Obs: O Flutter precisa de um simulador ou dispositivo físico para rodar, o tutorial está incluso na [documentação oficial do Flutter](https://docs.flutter.dev)
 
+Caso queira rodar em um dispositivo fixo com o Docker rodando em um computador da mesma rede, é necessário alterar o ip 127.0.0.1 para o ip do computador no arquivo [home.module.dart](https://github.com/thiagommohallem/desafio_toro_mobile/blob/master/toro_app/lib/app/modules/home/module/home.module.dart) (linha 15)
+
 ## Instruções de como rodar os testes
 Certifique-se que esta no diretório raiz do app desafio_toro_mobile/toro_app/ e execute:
 `flutter test`
