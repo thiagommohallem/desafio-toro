@@ -66,7 +66,7 @@ void main() {
             widget is Text &&
             widget.data == "+" + 100.0.toStringAsFixed(2) + "%" &&
             widget.style ==
-                TextStyle(
+                const TextStyle(
                   color: Colors.green,
                   fontSize: 20,
                 ),
@@ -95,7 +95,7 @@ void main() {
             widget is Text &&
             widget.data == (-100.0).toStringAsFixed(2) + "%" &&
             widget.style ==
-                TextStyle(
+                const TextStyle(
                   color: Colors.red,
                   fontSize: 20,
                 ),
