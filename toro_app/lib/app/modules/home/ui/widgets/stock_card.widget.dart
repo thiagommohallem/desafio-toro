@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:toro_app/app/modules/home/domain/models/stock_quote.model.dart';
 import 'package:toro_app/app/modules/home/ui/widgets/stock_line_chart.widget.dart';
+import 'package:toro_app/common/utils/media_query_converter.dart';
 
 class StockCard extends StatelessWidget {
   final StockQuote stockQuote;
@@ -19,7 +20,7 @@ class StockCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              width: 80,
+              width: baseWidthConverter(context, 80),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -38,11 +39,11 @@ class StockCard extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(
-              width: 5,
+            SizedBox(
+              width: baseWidthConverter(context, 5),
             ),
             SizedBox(
-              width: 110,
+              width: baseWidthConverter(context, 110),
               child: StockLineChart(stockQuote: stockQuote),
             ),
             const Spacer(),
@@ -50,7 +51,7 @@ class StockCard extends StatelessWidget {
               width: 7,
             ),
             SizedBox(
-              width: 80,
+              width: baseWidthConverter(context, 80),
               child: Center(
                 child: FittedBox(
                   child: Text(
