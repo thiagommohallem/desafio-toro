@@ -10,3 +10,9 @@ class StockQuotesReceived extends QuotesEvent {
   final List<StockQuote> stockQuotes;
   const StockQuotesReceived(this.stockQuotes);
 }
+
+class StockQuotesError extends QuotesEvent {
+  final QuotesConnectionException exception;
+
+  StockQuotesError(this.exception);
+}

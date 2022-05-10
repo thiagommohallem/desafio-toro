@@ -5,6 +5,7 @@ import 'package:toro_app/app/modules/home/domain/models/stock_quote.model.dart';
 import 'package:toro_app/app/modules/home/presenters/blocs/quotes_bloc.dart';
 import 'package:toro_app/app/modules/home/ui/widgets/stock_line_chart.widget.dart';
 import 'package:toro_app/colors.dart';
+import 'package:toro_app/common/widgets/toro_error_alert_dialog.widget.dart';
 import 'package:toro_app/common/widgets/toro_logo.widget.dart';
 import 'package:toro_app/common/widgets/toro_text.widget.dart';
 
@@ -55,6 +56,17 @@ class _HomePageState extends State<HomePage> {
           child: BlocBuilder<QuotesBloc, QuotesState>(
             bloc: _quotesBloc,
             builder: (_, state) {
+              if (state is StockReceivedError) {
+                WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+                  showDialog(
+                      context: context,
+                      builder: (_) {
+                        return ToroErrorAlertDialog(
+                            text: Text(state.exception.message));
+                      });
+                });
+              }
+
               return TabBarView(children: [
                 if (state is StockReceivedSuccess) ...[
                   _stockListViewTop5(state.stockQuotes),
@@ -119,6 +131,7 @@ class _HomePageState extends State<HomePage> {
       child: Container(
         padding: const EdgeInsets.all(24.0),
         height: 130,
+        width: double.infinity,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -143,23 +156,30 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             const SizedBox(
-              width: 10,
+              width: 5,
             ),
             SizedBox(
-              width: 150,
+              width: 110,
               child: StockLineChart(stockQuote: stockQuote),
             ),
+            const Spacer(),
             const SizedBox(
-              width: 10,
+              width: 7,
             ),
-            Center(
-              child: Text(
-                stockQuote.valuation > 0
-                    ? "+" + stockQuote.valuation.toStringAsFixed(2) + "%"
-                    : stockQuote.valuation.toStringAsFixed(2) + "%",
-                style: TextStyle(
-                  color: stockQuote.valuation > 0 ? Colors.green : Colors.red,
-                  fontSize: 20,
+            SizedBox(
+              width: 80,
+              child: Center(
+                child: FittedBox(
+                  child: Text(
+                    stockQuote.valuation > 0
+                        ? "+" + stockQuote.valuation.toStringAsFixed(2) + "%"
+                        : stockQuote.valuation.toStringAsFixed(2) + "%",
+                    style: TextStyle(
+                      color:
+                          stockQuote.valuation > 0 ? Colors.green : Colors.red,
+                      fontSize: 20,
+                    ),
+                  ),
                 ),
               ),
             ),

@@ -43,13 +43,17 @@ class GetQuotesUsecaseImpl implements IGetQuotesUsecase {
         return b.valuation.compareTo(a.valuation);
       });
       _streamController.sink.add(stockQuotes);
+    }, onDone: () {
+      _streamController.close();
+    }, onError: (_) {
+      _streamController.close();
     });
     return _streamController.stream;
   }
 
   @override
   dispose() {
-    _streamController.sink.close();
+    _streamController.close();
     _quotesRepository.dispose();
   }
 }

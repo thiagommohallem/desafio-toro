@@ -14,10 +14,19 @@ class QuotesRepositoryImpl implements QuotesRepository {
   @override
   Future<Stream<Stock>> retrieveQuotes() async {
     final quotesStream = await _quotesDatasource.retrieveQuotes();
-    quotesStream.listen((event) {
-      final stock = Stock.fromJson(event);
-      streamController.sink.add(stock);
-    });
+    quotesStream.listen(
+      (event) {
+        final stock = Stock.fromJson(event);
+        streamController.sink.add(stock);
+      },
+      onError: (e) {
+        streamController.close();
+      },
+      onDone: () {
+        streamController.close();
+      },
+    );
+
     return streamController.stream;
   }
 

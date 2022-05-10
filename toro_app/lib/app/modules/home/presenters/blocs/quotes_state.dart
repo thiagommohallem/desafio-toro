@@ -16,3 +16,12 @@ class StockReceivedSuccess extends QuotesState {
   @override
   List<Object?> get props => [stockQuotes];
 }
+
+class StockReceivedError extends QuotesState {
+  final QuotesConnectionException exception;
+
+  const StockReceivedError(this.exception);
+
+  @override
+  List<Object?> get props => [exception];
+}

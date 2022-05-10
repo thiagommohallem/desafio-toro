@@ -46,6 +46,7 @@ class StockLineChart extends StatelessWidget {
           )
         ],
       ),
+      swapAnimationDuration: const Duration(seconds: 0),
     );
   }
 }

@@ -13,22 +13,32 @@ class QuotesDatasourceImpl implements QuotesDatasource {
 
   @override
   Future<Stream<Map<String, dynamic>>> retrieveQuotes() async {
-    channel.stream.listen((event) {
-      String message = event.toString();
-      String messageWithoutBrackets = message.substring(1, message.length - 2);
-      String stockMessage = messageWithoutBrackets.split(',')[0];
-      String stockName = stockMessage.split(':')[0].replaceAll("\"", "");
-      double stockValue = double.parse(stockMessage.split(':')[1].trim());
-      double timestamp = double.parse(
-          messageWithoutBrackets.split(',')[1].split(':')[1].trim());
-      Map<String, dynamic> stockAsMap = {
-        'id': stockName,
-        'value': stockValue,
-        'timestamp': timestamp.toInt() * 1000,
-      };
-
-      _streamController.sink.add(stockAsMap);
-    });
+    channel.stream.listen(
+      (event) {
+        String message = event.toString();
+        String messageWithoutBrackets =
+            message.substring(1, message.length - 2);
+        String stockMessage = messageWithoutBrackets.split(',')[0];
+        String stockName = stockMessage.split(':')[0].replaceAll("\"", "");
+        double stockValue = double.parse(stockMessage.split(':')[1].trim());
+        double timestamp = double.parse(
+            messageWithoutBrackets.split(',')[1].split(':')[1].trim());
+        Map<String, dynamic> stockAsMap = {
+          'id': stockName,
+          'value': stockValue,
+          'timestamp': timestamp.toInt() * 1000,
+        };
+        _streamController.sink.add(stockAsMap);
+      },
+      onError: (e) {
+        _streamController.close();
+        channel.sink.close();
+      },
+      onDone: () {
+        _streamController.close();
+        channel.sink.close();
+      },
+    );
     return _streamController.stream;
   }
 
