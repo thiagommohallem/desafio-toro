@@ -19,26 +19,7 @@ class StockCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              width: baseWidthConverter(context, 80),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    stockQuote.stockId,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 20),
-                  ),
-                  const Spacer(),
-                  FittedBox(
-                    child: Text(
-                        "R\$" + stockQuote.currentPrince.toStringAsFixed(2),
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20)),
-                  ),
-                ],
-              ),
-            ),
+            _stockIdWithCurrentPriceColumn(context),
             SizedBox(
               width: baseWidthConverter(context, 5),
             ),
@@ -50,24 +31,48 @@ class StockCard extends StatelessWidget {
             const SizedBox(
               width: 7,
             ),
-            SizedBox(
-              width: baseWidthConverter(context, 80),
-              child: Center(
-                child: FittedBox(
-                  child: Text(
-                    stockQuote.valuation > 0
-                        ? "+" + stockQuote.valuation.toStringAsFixed(2) + "%"
-                        : stockQuote.valuation.toStringAsFixed(2) + "%",
-                    style: TextStyle(
-                      color:
-                          stockQuote.valuation > 0 ? Colors.green : Colors.red,
-                      fontSize: 20,
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            _valuation(context),
           ],
+        ),
+      ),
+    );
+  }
+
+  SizedBox _stockIdWithCurrentPriceColumn(BuildContext context) {
+    return SizedBox(
+      width: baseWidthConverter(context, 80),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            stockQuote.stockId,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          ),
+          const Spacer(),
+          FittedBox(
+            child: Text("R\$" + stockQuote.currentPrince.toStringAsFixed(2),
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  SizedBox _valuation(BuildContext context) {
+    return SizedBox(
+      width: baseWidthConverter(context, 80),
+      child: Center(
+        child: FittedBox(
+          child: Text(
+            stockQuote.valuation > 0
+                ? "+" + stockQuote.valuation.toStringAsFixed(2) + "%"
+                : stockQuote.valuation.toStringAsFixed(2) + "%",
+            style: TextStyle(
+              color: stockQuote.valuation > 0 ? Colors.green : Colors.red,
+              fontSize: 20,
+            ),
+          ),
         ),
       ),
     );
