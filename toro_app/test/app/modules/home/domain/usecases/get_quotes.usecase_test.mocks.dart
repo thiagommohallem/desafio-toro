@@ -7,7 +7,7 @@ import 'dart:async' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:toro_app/app/modules/home/domain/infra/quotes.repository.dart'
     as _i2;
-import 'package:toro_app/app/modules/home/infra/entity/stock.entity.dart'
+import 'package:toro_app/app/modules/home/domain/models/stock_quote.model.dart'
     as _i4;
 
 // ignore_for_file: type=lint
@@ -29,9 +29,9 @@ class MockQuotesRepository extends _i1.Mock implements _i2.QuotesRepository {
   }
 
   @override
-  _i3.Future<_i3.Stream<_i4.Stock>> retrieveQuotes() => (super.noSuchMethod(
-          Invocation.method(#retrieveQuotes, []),
-          returnValue:
-              Future<_i3.Stream<_i4.Stock>>.value(Stream<_i4.Stock>.empty()))
-      as _i3.Future<_i3.Stream<_i4.Stock>>);
+  _i3.Future<_i3.Stream<_i4.StockQuote>> retrieveQuotes() =>
+      (super.noSuchMethod(Invocation.method(#retrieveQuotes, []),
+              returnValue: Future<_i3.Stream<_i4.StockQuote>>.value(
+                  Stream<_i4.StockQuote>.empty()))
+          as _i3.Future<_i3.Stream<_i4.StockQuote>>);
 }

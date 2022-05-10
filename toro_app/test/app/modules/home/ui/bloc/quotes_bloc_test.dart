@@ -2,15 +2,16 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:toro_app/app/modules/home/domain/errors/quotes.exception.dart';
 import 'package:toro_app/app/modules/home/domain/models/stock_quote.model.dart';
-import 'package:toro_app/app/modules/home/domain/usecases/get_quotes.usecase.impl.dart';
 import 'package:toro_app/app/modules/home/presenters/blocs/quotes_bloc.dart';
+import 'package:toro_app/app/modules/home/presenters/usecases/get_quotes.usecase.dart';
 
 import 'quotes_bloc_test.mocks.dart';
 
-@GenerateMocks([GetQuotesUsecaseImpl])
+@GenerateMocks([IGetQuotesUsecase])
 void main() {
-  final MockGetQuotesUsecase _usecaseMock = MockGetQuotesUsecase();
+  final MockIGetQuotesUsecase _usecaseMock = MockIGetQuotesUsecase();
 
   final List<StockQuote> list = [
     StockQuote(
@@ -42,7 +43,22 @@ void main() {
         when(_usecaseMock())
             .thenAnswer((realInvocation) async => Stream.fromIterable([list]));
       },
-      expect: () => [StockReceivedSuccess(list)],
+      expect: () => [
+        StockReceivedSuccess(list),
+        const StockReceivedError(ConnectionClosedException(
+            message: 'Conexão fechada, confira se o servidor está ativo'))
+      ],
+    );
+
+    blocTest<QuotesBloc, QuotesState>(
+      "Should emit StockReceivedError when StockQuotesError is added",
+      build: () => QuotesBloc(_usecaseMock),
+      act: (bloc) {
+        bloc.add(
+            StockQuotesError(const ConnectionClosedException(message: '')));
+      },
+      expect: () =>
+          [const StockReceivedError(ConnectionClosedException(message: ''))],
     );
 
     blocTest<QuotesBloc, QuotesState>(

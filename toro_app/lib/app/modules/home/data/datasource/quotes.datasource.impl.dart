@@ -1,18 +1,19 @@
 import 'dart:async';
 
 import 'package:toro_app/app/modules/home/infra/datasources/quotes.datasource.dart';
+import 'package:toro_app/app/modules/home/infra/model/stock.model.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 class QuotesDatasourceImpl implements QuotesDatasource {
   final WebSocketChannel channel;
 
-  final StreamController<Map<String, dynamic>> _streamController =
-      StreamController<Map<String, dynamic>>.broadcast();
+  final StreamController<Stock> _streamController =
+      StreamController<Stock>.broadcast();
 
   QuotesDatasourceImpl(this.channel);
 
   @override
-  Future<Stream<Map<String, dynamic>>> retrieveQuotes() async {
+  Future<Stream<Stock>> retrieveQuotes() async {
     channel.stream.listen(
       (event) {
         String message = event.toString();
@@ -28,7 +29,7 @@ class QuotesDatasourceImpl implements QuotesDatasource {
           'value': stockValue,
           'timestamp': timestamp.toInt() * 1000,
         };
-        _streamController.sink.add(stockAsMap);
+        _streamController.sink.add(Stock.fromJson(stockAsMap));
       },
       onError: (e) {
         _streamController.close();

@@ -17,22 +17,17 @@ class GetQuotesUsecaseImpl implements IGetQuotesUsecase {
   @override
   Future<Stream<List<StockQuote>>> call() async {
     final stockStream = await _quotesRepository.retrieveQuotes();
-    stockStream.listen((stock) {
-      StockQuote stockQuote = StockQuote(
-          stockId: stock.id,
-          currentPrince: stock.value,
-          openPrice: stock.value,
-          valuation: 0.0,
-          timestamp: stock.timestamp);
+    stockStream.listen((stockQuote) {
       if (stockQuotes.contains(stockQuote)) {
         int indexOfQuote = stockQuotes.indexOf(stockQuote);
-        stockQuotes[indexOfQuote]
-            .priceHistory
-            .add(PriceHistory(timestamp: stock.timestamp, price: stock.value));
-        stockQuotes[indexOfQuote].currentPrince = stock.value;
+        stockQuotes[indexOfQuote].priceHistory.add(PriceHistory(
+            timestamp: stockQuote.timestamp, price: stockQuote.currentPrince));
+        stockQuotes[indexOfQuote].currentPrince = stockQuote.currentPrince;
         stockQuotes[indexOfQuote].valuation =
             stockQuotes[indexOfQuote].openPrice != 0
-                ? ((stock.value * 100 / stockQuotes[indexOfQuote].openPrice)) -
+                ? ((stockQuote.currentPrince *
+                        100 /
+                        stockQuotes[indexOfQuote].openPrice)) -
                     100
                 : 0;
       } else {

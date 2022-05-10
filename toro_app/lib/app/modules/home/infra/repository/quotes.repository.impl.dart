@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:toro_app/app/modules/home/domain/infra/quotes.repository.dart';
-import 'package:toro_app/app/modules/home/infra/entity/stock.entity.dart';
+import 'package:toro_app/app/modules/home/domain/models/stock_quote.model.dart';
 import 'package:toro_app/app/modules/home/infra/datasources/quotes.datasource.dart';
 
 class QuotesRepositoryImpl implements QuotesRepository {
@@ -9,15 +9,22 @@ class QuotesRepositoryImpl implements QuotesRepository {
 
   QuotesRepositoryImpl(this._quotesDatasource);
 
-  StreamController<Stock> streamController = StreamController.broadcast();
+  StreamController<StockQuote> streamController =
+      StreamController<StockQuote>.broadcast();
 
   @override
-  Future<Stream<Stock>> retrieveQuotes() async {
+  Future<Stream<StockQuote>> retrieveQuotes() async {
     final quotesStream = await _quotesDatasource.retrieveQuotes();
     quotesStream.listen(
       (event) {
-        final stock = Stock.fromJson(event);
-        streamController.sink.add(stock);
+        StockQuote stockQuote = StockQuote(
+          stockId: event.id,
+          currentPrince: event.value,
+          openPrice: event.value,
+          valuation: 0.0,
+          timestamp: event.timestamp,
+        );
+        streamController.sink.add(stockQuote);
       },
       onError: (e) {
         streamController.close();

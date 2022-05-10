@@ -24,7 +24,7 @@ class QuotesBloc extends Bloc<QuotesEvent, QuotesState> {
         },
         onDone: () => add(
           StockQuotesError(
-            ConnectionClosedException(
+            const ConnectionClosedException(
                 message: 'Conexão fechada, confira se o servidor está ativo'),
           ),
         ),

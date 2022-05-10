@@ -7,6 +7,7 @@ import 'dart:async' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:toro_app/app/modules/home/infra/datasources/quotes.datasource.dart'
     as _i2;
+import 'package:toro_app/app/modules/home/infra/model/stock.model.dart' as _i4;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -27,9 +28,9 @@ class MockQuotesDatasource extends _i1.Mock implements _i2.QuotesDatasource {
   }
 
   @override
-  _i3.Future<_i3.Stream<Map<String, dynamic>>> retrieveQuotes() =>
-      (super.noSuchMethod(Invocation.method(#retrieveQuotes, []),
-              returnValue: Future<_i3.Stream<Map<String, dynamic>>>.value(
-                  Stream<Map<String, dynamic>>.empty()))
-          as _i3.Future<_i3.Stream<Map<String, dynamic>>>);
+  _i3.Future<_i3.Stream<_i4.Stock>> retrieveQuotes() => (super.noSuchMethod(
+          Invocation.method(#retrieveQuotes, []),
+          returnValue:
+              Future<_i3.Stream<_i4.Stock>>.value(Stream<_i4.Stock>.empty()))
+      as _i3.Future<_i3.Stream<_i4.Stock>>);
 }
