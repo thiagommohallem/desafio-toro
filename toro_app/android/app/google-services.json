@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "169515770563",
+    "project_id": "desafio-toro-b2273",
+    "storage_bucket": "desafio-toro-b2273.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169515770563:android:f3ab821a8c6ea39eadf876",
+        "android_client_info": {
+          "package_name": "com.example.toro_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "169515770563-02k5idrqnf3fjuk641k8b23mr30995e2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVIRMFZLh5QngwvGyEPecTdQiRCDKeFa8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "169515770563-02k5idrqnf3fjuk641k8b23mr30995e2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
