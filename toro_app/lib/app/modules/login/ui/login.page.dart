@@ -107,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
         if (state is SignInInitial) {
           return _form();
         } else {
-          Modular.to.pushReplacementNamed('/login/home/');
+          Modular.to.navigate('/home/');
           return Container();
         }
       },

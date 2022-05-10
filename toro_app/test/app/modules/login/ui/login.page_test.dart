@@ -158,7 +158,7 @@ void main() {
       when(_navigatorMock.pushReplacementNamed(any))
           .thenAnswer((realInvocation) async => true);
       await tester.pumpWidget(const MaterialApp(home: LoginPage()));
-      verify(_navigatorMock.pushReplacementNamed('/login/home/')).called(1);
+      verify(_navigatorMock.navigate('/home/')).called(1);
     });
   });
 }

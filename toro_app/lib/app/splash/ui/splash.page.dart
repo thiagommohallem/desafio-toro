@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:toro_app/app/modules/onboarding/presenters/cubits/splash_logo_opacity.cubit.dart';
+import 'package:toro_app/app/splash/presenter/splash_logo_opacity.cubit.dart';
 import 'package:toro_app/common/widgets/toro_logo.widget.dart';
 import 'package:toro_app/common/widgets/toro_text.widget.dart';
 
@@ -26,7 +26,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     _initializeAnimationController();
     _startAnimations();
     Future.delayed(const Duration(seconds: 3))
-        .then((value) => Modular.to.pushNamed('/onboarding'));
+        .then((value) => Modular.to.navigate('/onboarding/'));
     super.initState();
   }
 
