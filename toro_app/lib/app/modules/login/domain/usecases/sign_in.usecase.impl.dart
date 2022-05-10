@@ -16,10 +16,11 @@ class SignInUsecaseImpl implements ISignInUsecase {
       {required String email, required String password}) async {
     final result = await _repository.signIn(email: email, password: password);
     if (result.isRight()) {
-      result.fold((l) => null, (r) {
+      return result.fold((l) => Left(l), (r) {
         if (r.id == "999") {
           return Left(BannedUserException(message: "Usuário desativado"));
         }
+        return Right(r);
       });
     }
     return result;
